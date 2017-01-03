@@ -79,6 +79,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = UIColor.white
+        
         setupBarstools()
         setupCreateGroup()
         setupWheelMenu()
@@ -92,6 +94,7 @@ class ViewController: UIViewController {
 
     func setupBarstools() {
         view.addSubview(groupContainer)
+        
         groupContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         groupContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         groupContainer.widthAnchor.constraint(equalToConstant: 258).isActive = true
