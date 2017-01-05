@@ -36,6 +36,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "wheel")
+        image.isUserInteractionEnabled = true
         return image
     }()
     
@@ -58,11 +59,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
         view.backgroundColor = UIColor.white
         
+        currentRotation = 0
+        spinAnimation = CABasicAnimation()
+        
         setupCollectionView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        
-        //setupBarstools()
         setupCreateGroup()
         setupWheelMenu()
     }
@@ -182,9 +184,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func setupWheelMenu() {
         view.addSubview(wheelImageView)
         wheelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        wheelImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:173).isActive = true
-        wheelImageView.heightAnchor.constraint(equalToConstant: 313).isActive = true
-        wheelImageView.widthAnchor.constraint(equalToConstant: 313).isActive = true
+        let approxWidth = view.frame.width
+        wheelImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: approxWidth/1.9).isActive = true
+        wheelImageView.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        wheelImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(didRotateWheel(sender:)))
+        wheelImageView.addGestureRecognizer(panGesture)
         
         wheelImageView.addSubview(notificationView)
         notificationView.heightAnchor.constraint(equalToConstant: 25).isActive = true
@@ -199,6 +205,32 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         numNotificationsLabel.widthAnchor.constraint(equalToConstant: 9).isActive = true
     }
     
+    var panGesture : UIPanGestureRecognizer!
+    var currentRotation : Double!
+    var spinAnimation : CABasicAnimation!
+    func didRotateWheel(sender : UIPanGestureRecognizer) {
+        
+        if sender.state == .ended {
+            spinAnimation.fromValue = currentRotation
+            let rotationAmount = M_PI*2/6
+            if sender.velocity(in: wheelImageView).x > 0 {
+                // went right
+                currentRotation = currentRotation + rotationAmount
+                spinAnimation.toValue = currentRotation
+            } else {
+                // went left
+                currentRotation = currentRotation - rotationAmount
+                spinAnimation.toValue = currentRotation
+            }
+            
+            spinAnimation.duration = 0.22
+            spinAnimation.repeatCount = 0
+            spinAnimation.isRemovedOnCompletion = false
+            spinAnimation.fillMode = kCAFillModeForwards
+            spinAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            wheelImageView.layer.add(spinAnimation, forKey: "transform.rotation.z")
+        }
+    }
 }
 
 extension UIColor {
