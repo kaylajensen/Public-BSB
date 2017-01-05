@@ -45,7 +45,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = false
         view.layer.masksToBounds = false
-        view.layer.cornerRadius = 12.5
+        view.layer.cornerRadius = 17.5
         view.backgroundColor = UIColor.init(netHex: 0xF8926D)
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = 0.8
@@ -193,10 +193,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         wheelImageView.addGestureRecognizer(panGesture)
         
         wheelImageView.addSubview(notificationView)
-        notificationView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        notificationView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        notificationView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        notificationView.widthAnchor.constraint(equalToConstant: 35).isActive = true
         notificationView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-21.5).isActive = true
-        notificationView.centerXAnchor.constraint(equalTo: wheelImageView.centerXAnchor,constant:-66).isActive = true
+        notificationView.centerXAnchor.constraint(equalTo: wheelImageView.centerXAnchor).isActive = true
         
         notificationView.addSubview(numNotificationsLabel)
         numNotificationsLabel.centerXAnchor.constraint(equalTo: notificationView.centerXAnchor).isActive = true
