@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
 
     var createNewGroup : UIButton = {
         let button = UIButton()
@@ -19,29 +19,6 @@ class ViewController: UIViewController {
         button.setTitleColor(color, for: .normal)
         button.titleLabel!.font = font
         return button
-    }()
-    
-    var barstoolImageView : UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "barstool")
-        return image
-    }()
-    
-    var groupContainer : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    var groupNameLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Slim Shady 3's"
-        let font = UIFont(name: "HelveticaNeue-Thin", size: 34.0)!
-        label.textAlignment = .center
-        label.font = font
-        return label
     }()
     
     var numNotificationsLabel : UILabel = {
@@ -81,37 +58,117 @@ class ViewController: UIViewController {
 
         view.backgroundColor = UIColor.white
         
-        setupBarstools()
+        setupCollectionView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        //setupBarstools()
         setupCreateGroup()
         setupWheelMenu()
+    }
+    
+    
+    var collectionView : UICollectionView!
+    var collectionViewLayout : UPCarouselFlowLayout!
+    
+    fileprivate var groupNames = ["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
+    
+    fileprivate var currentPage : Int = 0
+    
+    fileprivate var pageSize: CGSize {
+        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
+        var pageSize = layout.itemSize
+        if layout.scrollDirection == .horizontal {
+            pageSize.width += layout.minimumLineSpacing
+        } else {
+            pageSize.height += layout.minimumLineSpacing
+        }
+        return pageSize
+    }
+    
+    fileprivate var orientation: UIDeviceOrientation {
+        return UIDevice.current.orientation
+    }
+    
+    func setupCollectionView() {
+        view.backgroundColor = UIColor.white
+        
+        collectionViewLayout = UPCarouselFlowLayout()
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: 250)
+        
+        let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 325)
+        collectionView = UICollectionView(frame: frame, collectionViewLayout: collectionViewLayout)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.register(CarouselCollectionViewCell.self, forCellWithReuseIdentifier: CarouselCollectionViewCell.identifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        self.setupLayout()
+        self.currentPage = 0
+    }
+    
+    fileprivate func setupLayout() {
+        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
+        layout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 30)
+    }
+    
+    @objc fileprivate func rotationDidChange() {
+        guard !orientation.isFlat else { return }
+        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
+        let direction: UICollectionViewScrollDirection = UIDeviceOrientationIsPortrait(orientation) ? .horizontal : .vertical
+        layout.scrollDirection = direction
+        if currentPage > 0 {
+            let indexPath = IndexPath(item: currentPage, section: 0)
+            let scrollPosition: UICollectionViewScrollPosition = UIDeviceOrientationIsPortrait(orientation) ? .centeredHorizontally : .centeredVertically
+            self.collectionView.scrollToItem(at: indexPath, at: scrollPosition, animated: false)
+        }
+    }
+    
+    // MARK: - Card Collection Delegate & DataSource
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return groupNames.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.identifier, for: indexPath) as! CarouselCollectionViewCell
+        cell.groupImage.image = UIImage(named: "barstool")
+        cell.groupName.text = groupNames[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let group = groupNames[(indexPath as NSIndexPath).row]
+        let alert = UIAlertController(title: group, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
+        let pageSide = (layout.scrollDirection == .horizontal) ? self.pageSize.width : self.pageSize.height
+        let offset = (layout.scrollDirection == .horizontal) ? scrollView.contentOffset.x : scrollView.contentOffset.y
+        currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
     }
     
     override var prefersStatusBarHidden: Bool {
         get {
             return true
         }
-    }
-
-    func setupBarstools() {
-        view.addSubview(groupContainer)
-        
-        groupContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        groupContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        groupContainer.widthAnchor.constraint(equalToConstant: 258).isActive = true
-        groupContainer.heightAnchor.constraint(equalToConstant: 164).isActive = true
-
-        groupContainer.addSubview(barstoolImageView)
-        barstoolImageView.centerXAnchor.constraint(equalTo: groupContainer.centerXAnchor).isActive = true
-        barstoolImageView.topAnchor.constraint(equalTo: groupContainer.topAnchor).isActive = true
-        barstoolImageView.heightAnchor.constraint(equalToConstant: 124).isActive = true
-        barstoolImageView.widthAnchor.constraint(equalToConstant: 89).isActive = true
-        
-        groupContainer.addSubview(groupNameLabel)
-        groupNameLabel.centerXAnchor.constraint(equalTo: groupContainer.centerXAnchor).isActive = true
-        groupNameLabel.bottomAnchor.constraint(equalTo: groupContainer.bottomAnchor).isActive = true
-        groupNameLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        groupNameLabel.widthAnchor.constraint(equalTo: groupContainer.widthAnchor).isActive = true
-        
     }
     
     func setupCreateGroup() {
