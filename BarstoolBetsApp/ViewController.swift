@@ -18,8 +18,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var panGesture : UIPanGestureRecognizer!
     var currentRotation : Double!
     var spinAnimation : CABasicAnimation!
-    
-    
+    var player : AVPlayer!
+    var playerController : AVPlayerViewController!
+    var numPlays = 1
     
     fileprivate var groupNames = ["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
     
@@ -46,7 +47,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let color = UIColor(netHex: 0xF56D6A)
         button.setTitleColor(color, for: .normal)
         button.titleLabel!.font = font
-        button.addTarget(self, action: #selector(createNewGroupPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -81,6 +81,34 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         view.layer.shadowOffset = CGSize.zero
         view.layer.shadowRadius = 4
         return view
+    }()
+    
+    lazy var epicButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("EPIC", for: .normal)
+        button.setTitleColor(UIColor.init(netHex: 0xFBC171), for: .normal)
+        button.addTarget(self, action: #selector(createNewGroupPressed(sender:)), for: .touchUpInside)
+        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
+        return button
+    }()
+    
+    lazy var groupsButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Groups", for: .normal)
+        button.setTitleColor(UIColor.init(netHex: 0xFAA86F), for: .normal)
+        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
+        return button
+    }()
+    
+    lazy var profileButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Me", for: .normal)
+        button.setTitleColor(UIColor.init(netHex: 0xF56D6A), for: .normal)
+        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
+        return button
     }()
     
     override var prefersStatusBarHidden: Bool {
@@ -183,12 +211,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         player.play()
         self.present(playerController, animated: true, completion: nil)
-        
     }
-    
-    var player : AVPlayer!
-    var playerController : AVPlayerViewController!
-    var numPlays = 1
     
     func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
@@ -335,6 +358,24 @@ extension ViewController {
         numNotificationsLabel.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
         numNotificationsLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         numNotificationsLabel.widthAnchor.constraint(equalToConstant: 9).isActive = true
+        
+        view.addSubview(epicButton)
+        epicButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-5).isActive = true
+        epicButton.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
+        epicButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        epicButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        view.addSubview(groupsButton)
+        groupsButton.topAnchor.constraint(equalTo: wheelImageView.topAnchor,constant:5).isActive = true
+        groupsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        groupsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        groupsButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        view.addSubview(profileButton)
+        profileButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:5).isActive = true
+        profileButton.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
+        profileButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        profileButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
 
