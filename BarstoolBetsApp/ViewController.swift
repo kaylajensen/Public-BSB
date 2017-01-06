@@ -108,7 +108,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let opagueOverlay = UIView()
         opagueOverlay.translatesAutoresizingMaskIntoConstraints = false
-        opagueOverlay.layer.cornerRadius = 10
+        opagueOverlay.layer.cornerRadius = 3
         opagueOverlay.layer.masksToBounds = true
         opagueOverlay.clipsToBounds = false
         opagueOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.45)
@@ -136,7 +136,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         descriptionLabel.numberOfLines = 0
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.textColor = UIColor.white
-        descriptionLabel.font = UIFont.init(name: "HelveticaNeue-Light", size: 14)
+        descriptionLabel.font = UIFont.init(name: "HelveticaNeue-Light", size: 13)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.textAlignment = .center
         
@@ -162,7 +162,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         opagueOverlay.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
         opagueOverlay.addSubview(placeLabel)
-        placeLabel.topAnchor.constraint(equalTo: opagueOverlay.topAnchor,constant: 10).isActive = true
+        placeLabel.topAnchor.constraint(equalTo: opagueOverlay.topAnchor,constant: 5).isActive = true
         placeLabel.centerXAnchor.constraint(equalTo: opagueOverlay.centerXAnchor).isActive = true
         placeLabel.widthAnchor.constraint(equalTo: opagueOverlay.widthAnchor).isActive = true
         placeLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
@@ -177,7 +177,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         descriptionLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor).isActive = true
         descriptionLabel.centerXAnchor.constraint(equalTo: opagueOverlay.centerXAnchor).isActive = true
         descriptionLabel.widthAnchor.constraint(equalTo: opagueOverlay.widthAnchor).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo: opagueOverlay.bottomAnchor).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo: opagueOverlay.bottomAnchor,constant:-5).isActive = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)),
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
