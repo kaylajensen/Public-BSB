@@ -18,8 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        let nav1 = UINavigationController()
         let vc = ViewController()
-        window?.rootViewController = vc
+        nav1.viewControllers = [vc]
+        window?.rootViewController = nav1
         window?.makeKeyAndVisible()
         
         application.isStatusBarHidden = true

@@ -122,6 +122,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(color: UIColor.clear), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
         currentRotation = 0
         spinAnimation = CABasicAnimation()
@@ -223,7 +227,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
         
-        if numPlays < 2 {
+        if numPlays < 1 {
             self.player.seek(to: kCMTimeZero)
             self.player.play()
             numPlays = numPlays + 1
@@ -397,6 +401,19 @@ extension UIColor {
     
     convenience init(netHex:Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+}
+
+extension UIImage {
+    class func imageWithColor(color: UIColor) -> UIImage {
+        let rect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        let size = CGSize(width: 1, height: 1)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
     }
 }
 
