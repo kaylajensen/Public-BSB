@@ -108,7 +108,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let opagueOverlay = UIView()
         opagueOverlay.translatesAutoresizingMaskIntoConstraints = false
-        opagueOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        opagueOverlay.layer.cornerRadius = 10
+        opagueOverlay.layer.masksToBounds = true
+        opagueOverlay.clipsToBounds = false
+        opagueOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.45)
+        
+        let epicLogo = UIImageView()
+        epicLogo.image = UIImage(named: "epic")
+        epicLogo.translatesAutoresizingMaskIntoConstraints = false
+        epicLogo.contentMode = .scaleAspectFit
         
         let placeLabel = UILabel()
         placeLabel.text = "Triple C Brewing Company"
@@ -135,11 +143,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let path = Bundle.main.path(forResource: "snippet", ofType: "mov")
         let url = URL(fileURLWithPath: path!)
         
-        let player = AVPlayer(url: url)
-        let playerController = AVPlayerViewController()
+        player = AVPlayer(url: url)
+        playerController = AVPlayerViewController()
         playerController.player = player
         playerController.showsPlaybackControls = false
         playerController.view.frame = self.view.frame
+        
+        playerController.view.addSubview(epicLogo)
+        epicLogo.topAnchor.constraint(equalTo: playerController.view.topAnchor,constant:10).isActive = true
+        epicLogo.rightAnchor.constraint(equalTo: playerController.view.rightAnchor,constant:-10).isActive = true
+        epicLogo.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        epicLogo.widthAnchor.constraint(equalToConstant: 42).isActive = true
 
         playerController.view.addSubview(opagueOverlay)
         opagueOverlay.centerXAnchor.constraint(equalTo: playerController.view.centerXAnchor).isActive = true
@@ -172,9 +186,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
+    var player : AVPlayer!
+    var playerController : AVPlayerViewController!
+    var numPlays = 1
+    
     func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
-        self.dismiss(animated: true, completion: nil)
+        
+        if numPlays < 2 {
+            self.player.seek(to: kCMTimeZero)
+            self.player.play()
+            numPlays = numPlays + 1
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func didRotateWheel(sender : UIPanGestureRecognizer) {
