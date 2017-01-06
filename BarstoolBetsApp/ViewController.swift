@@ -108,6 +108,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         button.setTitle("Me", for: .normal)
         button.setTitleColor(UIColor.init(netHex: 0xF56D6A), for: .normal)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
+        button.addTarget(self, action: #selector(myProfilePressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -130,6 +131,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         setupCreateGroup()
         setupWheelMenu()
+    }
+    
+    func myProfilePressed(sender : AnyObject) {
+        let vc = MyProfileViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true, completion: nil)
     }
     
     func createNewGroupPressed(sender : AnyObject) {

@@ -13,6 +13,7 @@
 		323B5E9C1DC7F86200674363 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */; };
 		323B5EA61DC8047E00674363 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 323B5EA51DC8047E00674363 /* launch.png */; };
 		32B88B441E1FC08D004BE1C0 /* snippet.mov in Resources */ = {isa = PBXBuildFile; fileRef = 32B88B431E1FC08D004BE1C0 /* snippet.mov */; };
+		32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */; };
 		32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */; };
 		32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,7 @@
 		323B5E9D1DC7F86200674363 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		323B5EA51DC8047E00674363 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		32B88B431E1FC08D004BE1C0 /* snippet.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = snippet.mov; sourceTree = "<group>"; };
+		32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +71,7 @@
 				32B88B431E1FC08D004BE1C0 /* snippet.mov */,
 				323B5EA51DC8047E00674363 /* launch.png */,
 				323B5E9D1DC7F86200674363 /* Info.plist */,
+				32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */,
 			);
 			path = BarstoolBetsApp;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */,
 				323B5E941DC7F86200674363 /* ViewController.swift in Sources */,
 				32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */,
 				32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */,
