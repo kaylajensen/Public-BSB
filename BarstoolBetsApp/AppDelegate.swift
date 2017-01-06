@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
         
+        application.isStatusBarHidden = true
         return true
     }
 

@@ -7,10 +7,38 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
 
-    var createNewGroup : UIButton = {
+    var collectionView : UICollectionView!
+    var collectionViewLayout : UPCarouselFlowLayout!
+    fileprivate var currentPage : Int = 0
+    var panGesture : UIPanGestureRecognizer!
+    var currentRotation : Double!
+    var spinAnimation : CABasicAnimation!
+    
+    
+    
+    fileprivate var groupNames = ["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
+    
+    fileprivate var pageSize: CGSize {
+        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
+        var pageSize = layout.itemSize
+        if layout.scrollDirection == .horizontal {
+            pageSize.width += layout.minimumLineSpacing
+        } else {
+            pageSize.height += layout.minimumLineSpacing
+        }
+        return pageSize
+    }
+    
+    fileprivate var orientation: UIDeviceOrientation {
+        return UIDevice.current.orientation
+    }
+    
+    lazy var createNewGroup : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("+", for: .normal)
@@ -18,6 +46,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let color = UIColor(netHex: 0xF56D6A)
         button.setTitleColor(color, for: .normal)
         button.titleLabel!.font = font
+        button.addTarget(self, action: #selector(createNewGroupPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -54,6 +83,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return view
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        get {
+            return true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,29 +104,139 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         setupWheelMenu()
     }
     
+    func createNewGroupPressed(sender : AnyObject) {
+        
+        let opagueOverlay = UIView()
+        opagueOverlay.translatesAutoresizingMaskIntoConstraints = false
+        opagueOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        
+        let placeLabel = UILabel()
+        placeLabel.text = "Triple C Brewing Company"
+        placeLabel.textColor = UIColor.white
+        placeLabel.font = UIFont.init(name: "HelveticaNeue-Light", size: 13)
+        placeLabel.translatesAutoresizingMaskIntoConstraints = false
+        placeLabel.textAlignment = .center
+        let locationLabel = UILabel()
+        locationLabel.text = "Charlotte, NC"
+        locationLabel.textColor = UIColor.white
+        locationLabel.font = UIFont.init(name: "HelveticaNeue-Thin", size: 13)
+        locationLabel.translatesAutoresizingMaskIntoConstraints = false
+        locationLabel.textAlignment = .center
+        let descriptionLabel = UILabel()
+        // only allow 100 characters
+        descriptionLabel.text = "If I roll a 7... Deer filter with a small child"
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.lineBreakMode = .byWordWrapping
+        descriptionLabel.textColor = UIColor.white
+        descriptionLabel.font = UIFont.init(name: "HelveticaNeue-Light", size: 14)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.textAlignment = .center
+        
+        let path = Bundle.main.path(forResource: "snippet", ofType: "mov")
+        let url = URL(fileURLWithPath: path!)
+        
+        let player = AVPlayer(url: url)
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        playerController.showsPlaybackControls = false
+        playerController.view.frame = self.view.frame
+
+        playerController.view.addSubview(opagueOverlay)
+        opagueOverlay.centerXAnchor.constraint(equalTo: playerController.view.centerXAnchor).isActive = true
+        opagueOverlay.bottomAnchor.constraint(equalTo: playerController.view.bottomAnchor,constant:-10).isActive = true
+        opagueOverlay.widthAnchor.constraint(equalTo: playerController.view.widthAnchor,constant:-20).isActive = true
+        opagueOverlay.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        
+        opagueOverlay.addSubview(placeLabel)
+        placeLabel.topAnchor.constraint(equalTo: opagueOverlay.topAnchor,constant: 10).isActive = true
+        placeLabel.centerXAnchor.constraint(equalTo: opagueOverlay.centerXAnchor).isActive = true
+        placeLabel.widthAnchor.constraint(equalTo: opagueOverlay.widthAnchor).isActive = true
+        placeLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        
+        opagueOverlay.addSubview(locationLabel)
+        locationLabel.topAnchor.constraint(equalTo: placeLabel.bottomAnchor).isActive = true
+        locationLabel.centerXAnchor.constraint(equalTo: opagueOverlay.centerXAnchor).isActive = true
+        locationLabel.widthAnchor.constraint(equalTo: opagueOverlay.widthAnchor).isActive = true
+        locationLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        
+        opagueOverlay.addSubview(descriptionLabel)
+        descriptionLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor).isActive = true
+        descriptionLabel.centerXAnchor.constraint(equalTo: opagueOverlay.centerXAnchor).isActive = true
+        descriptionLabel.widthAnchor.constraint(equalTo: opagueOverlay.widthAnchor).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo: opagueOverlay.bottomAnchor).isActive = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)),
+                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        player.play()
+        self.present(playerController, animated: true, completion: nil)
+        
+    }
     
-    var collectionView : UICollectionView!
-    var collectionViewLayout : UPCarouselFlowLayout!
+    func playerDidFinishPlaying(note: NSNotification) {
+        print("Video Finished")
+        self.dismiss(animated: true, completion: nil)
+    }
     
-    fileprivate var groupNames = ["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
-    
-    fileprivate var currentPage : Int = 0
-    
-    fileprivate var pageSize: CGSize {
-        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
-        var pageSize = layout.itemSize
-        if layout.scrollDirection == .horizontal {
-            pageSize.width += layout.minimumLineSpacing
-        } else {
-            pageSize.height += layout.minimumLineSpacing
+    func didRotateWheel(sender : UIPanGestureRecognizer) {
+        if sender.state == .ended {
+            spinAnimation.fromValue = currentRotation
+            let rotationAmount = M_PI*2/6
+            if sender.velocity(in: wheelImageView).x > 0 {
+                // went right
+                currentRotation = currentRotation + rotationAmount
+                spinAnimation.toValue = currentRotation
+            } else {
+                // went left
+                currentRotation = currentRotation - rotationAmount
+                spinAnimation.toValue = currentRotation
+            }
+            
+            spinAnimation.duration = 0.22
+            spinAnimation.repeatCount = 0
+            spinAnimation.isRemovedOnCompletion = false
+            spinAnimation.fillMode = kCAFillModeForwards
+            spinAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            wheelImageView.layer.add(spinAnimation, forKey: "transform.rotation.z")
         }
-        return pageSize
+    }
+}
+
+extension ViewController {
+    // MARK: - Card Collection Delegate & DataSource
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
-    fileprivate var orientation: UIDeviceOrientation {
-        return UIDevice.current.orientation
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return groupNames.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.identifier, for: indexPath) as! CarouselCollectionViewCell
+        cell.groupImage.image = UIImage(named: "barstool")
+        cell.groupName.text = groupNames[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let group = groupNames[(indexPath as NSIndexPath).row]
+        let alert = UIAlertController(title: group, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
+        let pageSide = (layout.scrollDirection == .horizontal) ? self.pageSize.width : self.pageSize.height
+        let offset = (layout.scrollDirection == .horizontal) ? scrollView.contentOffset.x : scrollView.contentOffset.y
+        currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
+    }
+}
+
+// MARK: - Setup Functions
+extension ViewController {
     func setupCollectionView() {
         view.backgroundColor = UIColor.white
         
@@ -135,44 +280,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-    // MARK: - Card Collection Delegate & DataSource
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return groupNames.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.identifier, for: indexPath) as! CarouselCollectionViewCell
-        cell.groupImage.image = UIImage(named: "barstool")
-        cell.groupName.text = groupNames[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let group = groupNames[(indexPath as NSIndexPath).row]
-        let alert = UIAlertController(title: group, message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    
-    // MARK: - UIScrollViewDelegate
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
-        let pageSide = (layout.scrollDirection == .horizontal) ? self.pageSize.width : self.pageSize.height
-        let offset = (layout.scrollDirection == .horizontal) ? scrollView.contentOffset.x : scrollView.contentOffset.y
-        currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return true
-        }
-    }
-    
     func setupCreateGroup() {
         view.addSubview(createNewGroup)
         createNewGroup.heightAnchor.constraint(equalToConstant: 54).isActive = true
@@ -192,44 +299,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(didRotateWheel(sender:)))
         wheelImageView.addGestureRecognizer(panGesture)
         
-        wheelImageView.addSubview(notificationView)
+        view.addSubview(notificationView)
         notificationView.heightAnchor.constraint(equalToConstant: 35).isActive = true
         notificationView.widthAnchor.constraint(equalToConstant: 35).isActive = true
         notificationView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-21.5).isActive = true
-        notificationView.centerXAnchor.constraint(equalTo: wheelImageView.centerXAnchor).isActive = true
+        notificationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         notificationView.addSubview(numNotificationsLabel)
         numNotificationsLabel.centerXAnchor.constraint(equalTo: notificationView.centerXAnchor).isActive = true
         numNotificationsLabel.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
         numNotificationsLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         numNotificationsLabel.widthAnchor.constraint(equalToConstant: 9).isActive = true
-    }
-    
-    var panGesture : UIPanGestureRecognizer!
-    var currentRotation : Double!
-    var spinAnimation : CABasicAnimation!
-    func didRotateWheel(sender : UIPanGestureRecognizer) {
-        
-        if sender.state == .ended {
-            spinAnimation.fromValue = currentRotation
-            let rotationAmount = M_PI*2/6
-            if sender.velocity(in: wheelImageView).x > 0 {
-                // went right
-                currentRotation = currentRotation + rotationAmount
-                spinAnimation.toValue = currentRotation
-            } else {
-                // went left
-                currentRotation = currentRotation - rotationAmount
-                spinAnimation.toValue = currentRotation
-            }
-            
-            spinAnimation.duration = 0.22
-            spinAnimation.repeatCount = 0
-            spinAnimation.isRemovedOnCompletion = false
-            spinAnimation.fillMode = kCAFillModeForwards
-            spinAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-            wheelImageView.layer.add(spinAnimation, forKey: "transform.rotation.z")
-        }
     }
 }
 
