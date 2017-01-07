@@ -170,6 +170,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         locationLabel.textAlignment = .center
         let descriptionLabel = UILabel()
+        
         // only allow 100 characters
         descriptionLabel.text = "If I roll a 7... Deer filter with a small child"
         descriptionLabel.numberOfLines = 0
@@ -300,6 +301,7 @@ extension ViewController {
         view.backgroundColor = UIColor.white
         
         collectionViewLayout = UPCarouselFlowLayout()
+        collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: 250)
         

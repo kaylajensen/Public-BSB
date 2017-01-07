@@ -66,12 +66,12 @@
 				323B5E931DC7F86200674363 /* ViewController.swift */,
 				32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */,
 				32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */,
+				32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */,
 				323B5E981DC7F86200674363 /* Assets.xcassets */,
 				323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */,
 				32B88B431E1FC08D004BE1C0 /* snippet.mov */,
 				323B5EA51DC8047E00674363 /* launch.png */,
 				323B5E9D1DC7F86200674363 /* Info.plist */,
-				32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */,
 			);
 			path = BarstoolBetsApp;
 			sourceTree = "<group>";
