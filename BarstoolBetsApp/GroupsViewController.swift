@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
+class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
 
     var collectionView : UICollectionView!
     var collectionViewLayout : UPCarouselFlowLayout!
@@ -47,6 +47,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let color = UIColor(netHex: 0xF56D6A)
         button.setTitleColor(color, for: .normal)
         button.titleLabel!.font = font
+        button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -88,7 +89,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("EPIC", for: .normal)
         button.setTitleColor(UIColor.init(netHex: 0xFBC171), for: .normal)
-        button.addTarget(self, action: #selector(createNewGroupPressed(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(epicBetsPressed(sender:)), for: .touchUpInside)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
         return button
     }()
@@ -132,7 +133,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         setupCollectionView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GroupsViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         setupCreateGroup()
         setupWheelMenu()
     }
@@ -143,7 +144,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.present(vc, animated: true, completion: nil)
     }
     
-    func createNewGroupPressed(sender : AnyObject) {
+    func createGroupButtonPressed(sender : AnyObject) {
+        let vc = CreateGroupViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func epicBetsPressed(sender : AnyObject) {
         
         let opagueOverlay = UIView()
         opagueOverlay.translatesAutoresizingMaskIntoConstraints = false
@@ -261,7 +267,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 }
 
-extension ViewController {
+extension GroupsViewController {
     // MARK: - Card Collection Delegate & DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -296,7 +302,7 @@ extension ViewController {
 }
 
 // MARK: - Setup Functions
-extension ViewController {
+extension GroupsViewController {
     func setupCollectionView() {
         view.backgroundColor = UIColor.white
         

@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E911DC7F86200674363 /* AppDelegate.swift */; };
-		323B5E941DC7F86200674363 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E931DC7F86200674363 /* ViewController.swift */; };
+		323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E931DC7F86200674363 /* GroupsViewController.swift */; };
 		323B5E991DC7F86200674363 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E981DC7F86200674363 /* Assets.xcassets */; };
 		323B5E9C1DC7F86200674363 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */; };
 		323B5EA61DC8047E00674363 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 323B5EA51DC8047E00674363 /* launch.png */; };
 		32B88B441E1FC08D004BE1C0 /* snippet.mov in Resources */ = {isa = PBXBuildFile; fileRef = 32B88B431E1FC08D004BE1C0 /* snippet.mov */; };
 		32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */; };
+		32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */; };
 		32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */; };
 		32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */; };
 /* End PBXBuildFile section */
@@ -21,13 +22,14 @@
 /* Begin PBXFileReference section */
 		323B5E8E1DC7F86200674363 /* BarstoolBetsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarstoolBetsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		323B5E911DC7F86200674363 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		323B5E931DC7F86200674363 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		323B5E931DC7F86200674363 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		323B5E981DC7F86200674363 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		323B5E9B1DC7F86200674363 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		323B5E9D1DC7F86200674363 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		323B5EA51DC8047E00674363 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		32B88B431E1FC08D004BE1C0 /* snippet.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = snippet.mov; sourceTree = "<group>"; };
 		32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,17 +65,50 @@
 			isa = PBXGroup;
 			children = (
 				323B5E911DC7F86200674363 /* AppDelegate.swift */,
-				323B5E931DC7F86200674363 /* ViewController.swift */,
-				32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */,
-				32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */,
-				32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */,
+				32F5B3001E21619300D5C157 /* Profiles */,
+				32B88B4B1E21608D004BE1C0 /* Groups */,
 				323B5E981DC7F86200674363 /* Assets.xcassets */,
-				323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */,
-				32B88B431E1FC08D004BE1C0 /* snippet.mov */,
-				323B5EA51DC8047E00674363 /* launch.png */,
-				323B5E9D1DC7F86200674363 /* Info.plist */,
+				32B88B4A1E216059004BE1C0 /* Supporting Files */,
+				32B88B491E21603B004BE1C0 /* Libraries */,
 			);
 			path = BarstoolBetsApp;
+			sourceTree = "<group>";
+		};
+		32B88B491E21603B004BE1C0 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		32B88B4A1E216059004BE1C0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				323B5E9D1DC7F86200674363 /* Info.plist */,
+				32B88B431E1FC08D004BE1C0 /* snippet.mov */,
+				323B5EA51DC8047E00674363 /* launch.png */,
+				323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		32B88B4B1E21608D004BE1C0 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				323B5E931DC7F86200674363 /* GroupsViewController.swift */,
+				32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */,
+				32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		32F5B3001E21619300D5C157 /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */,
+			);
+			name = Profiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,7 +186,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */,
-				323B5E941DC7F86200674363 /* ViewController.swift in Sources */,
+				323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */,
+				32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */,
 				32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */,
 				32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */,
 				323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */,

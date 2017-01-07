@@ -136,7 +136,7 @@ class MyProfileViewController: UIViewController {
         
         view.addSubview(exitButton)
         exitButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-10).isActive = true
-        exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-10).isActive = true
+        exitButton.topAnchor.constraint(equalTo: view.topAnchor,constant:10).isActive = true
         
     }
     
