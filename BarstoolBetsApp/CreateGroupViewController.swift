@@ -29,6 +29,23 @@ class CreateGroupViewController: UIViewController {
         field.autocapitalizationType = .words
         return field
     }()
+    
+    var friendsAddedLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.black
+        label.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
+        label.text = "Friends Added"
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var gradientSeparator : UIImageView = {
+        let view = UIImageView(image: UIImage(named: "gradient_line"))
+        view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +82,19 @@ class CreateGroupViewController: UIViewController {
         seperatorView.centerXAnchor.constraint(equalTo: groupNameTextView.centerXAnchor).isActive = true
         seperatorView.topAnchor.constraint(equalTo: groupNameTextView.bottomAnchor,constant: 4).isActive = true
         seperatorView.widthAnchor.constraint(equalTo: groupNameTextView.widthAnchor).isActive = true
-        seperatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        seperatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        view.addSubview(friendsAddedLabel)
+        friendsAddedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        friendsAddedLabel.topAnchor.constraint(equalTo: seperatorView.bottomAnchor,constant:40).isActive = true
+        friendsAddedLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        friendsAddedLabel.widthAnchor.constraint(equalTo: groupNameTextView.widthAnchor).isActive = true
+        
+        view.addSubview(gradientSeparator)
+        gradientSeparator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        gradientSeparator.topAnchor.constraint(equalTo: friendsAddedLabel.bottomAnchor,constant:4).isActive = true
+        gradientSeparator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        gradientSeparator.widthAnchor.constraint(equalTo: groupNameTextView.widthAnchor).isActive = true
     }
 
 
