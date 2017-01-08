@@ -27,6 +27,7 @@ class CreateGroupViewController: UIViewController {
         field.defaultTextAttributes = [NSFontAttributeName : UIFont.init(name: "HelveticaNeue-Thin", size: 17)!]
         field.textColor = UIColor.black
         field.autocapitalizationType = .words
+        field.keyboardAppearance = .dark
         return field
     }()
     
@@ -97,5 +98,8 @@ class CreateGroupViewController: UIViewController {
         gradientSeparator.widthAnchor.constraint(equalTo: groupNameTextView.widthAnchor).isActive = true
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        groupNameTextView.resignFirstResponder()
+    }
 
 }

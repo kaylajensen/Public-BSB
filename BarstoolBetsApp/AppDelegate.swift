@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav1.viewControllers = [vc]
         window?.rootViewController = nav1
         window?.makeKeyAndVisible()
-        
+
         application.isStatusBarHidden = true
         return true
     }

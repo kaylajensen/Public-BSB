@@ -113,12 +113,6 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         return button
     }()
     
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return true
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -134,7 +128,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         setupCollectionView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(GroupsViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        setupCreateGroup()
+        //setupCreateGroup()
         setupWheelMenu()
     }
     
@@ -324,7 +318,7 @@ extension GroupsViewController {
         collectionView.heightAnchor.constraint(equalToConstant: 350).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor,constant:100).isActive = true
         
         self.setupLayout()
         self.currentPage = 0
@@ -377,6 +371,14 @@ extension GroupsViewController {
         numNotificationsLabel.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
         numNotificationsLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         numNotificationsLabel.widthAnchor.constraint(equalToConstant: 9).isActive = true
+        
+        notificationView.isHidden = true
+        
+        view.addSubview(createNewGroup)
+        createNewGroup.heightAnchor.constraint(equalToConstant: 54).isActive = true
+        createNewGroup.widthAnchor.constraint(equalToConstant: 29).isActive = true
+        createNewGroup.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
+        createNewGroup.centerXAnchor.constraint(equalTo: notificationView.centerXAnchor).isActive = true
         
         view.addSubview(epicButton)
         epicButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-5).isActive = true
