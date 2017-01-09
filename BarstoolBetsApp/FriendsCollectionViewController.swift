@@ -10,91 +10,134 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class FriendsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class FriendsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     var collectionView: UICollectionView!
     
+    var titleLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.black
+        label.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
+        label.text = "Friends"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var searchBar : UISearchBar = {
+        let bar = UISearchBar()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.placeholder = "Search Friends"
+        bar.barStyle = .default
+        
+        let txtSearchField : UITextField = bar.value(forKey: "_searchField") as! UITextField
+        txtSearchField.backgroundColor = UIColor.white
+        txtSearchField.leftViewMode = .never
+        txtSearchField.rightViewMode = .never
+        txtSearchField.borderStyle = .none
+        txtSearchField.font = UIFont.init(name: "HelveticaNeue-Thin", size: 16)
+        txtSearchField.layer.cornerRadius = 0
+        txtSearchField.layer.borderWidth = 0
+        txtSearchField.clearButtonMode = .always
+        bar.barTintColor = UIColor.white
+        bar.isTranslucent = false
+        bar.barTintColor = UIColor.white
+        bar.backgroundImage = UIImage()
+        bar.backgroundColor = UIColor.white
+        bar.autocapitalizationType = .words
+        return bar
+    }()
+    
+    var gradientSeparator : UIImageView = {
+        let view = UIImageView(image: UIImage(named: "gradient_line"))
+        view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        view.backgroundColor = UIColor.white
+        
+        setupTopView()
         setupCollectionView()
+        
+        searchBar.delegate = self
+        searchBar.becomeFirstResponder()
+    }
+    
+    func setupTopView() {
+        view.addSubview(titleLabel)
+        titleLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 54).isActive = true
+        
+        view.addSubview(gradientSeparator)
+        gradientSeparator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        gradientSeparator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        gradientSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        gradientSeparator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        view.addSubview(searchBar)
+        searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: gradientSeparator.bottomAnchor).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        searchBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     }
     
     func setupCollectionView() {
         let screenWidth = view.frame.size.width - 7.5
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 2.5, left: 0, bottom: 2.5, right: 0)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.itemSize = CGSize(width: screenWidth/4, height: screenWidth/4)
         flowLayout.minimumInteritemSpacing = 2.5
         flowLayout.minimumLineSpacing = 2.5
         
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
+        let collectionViewFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.height/2)
+        collectionView = UICollectionView(frame: collectionViewFrame, collectionViewLayout: flowLayout)
         collectionView.register(FriendCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.white
         view.addSubview(collectionView)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
-    // MARK: UICollectionViewDataSource
+}
 
+// MARK: CollectionView Delegate and DataSource
+extension FriendsCollectionViewController {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 50
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FriendCollectionViewCell
-//        cell.layer.shouldRasterize = true
-//        cell.layer.rasterizationScale = UIScreen.main.scale
-//        cell.photoImageView.contentMode = .scaleAspectFill
-//        cell.photoLabel.text = photo.label
-//        cell.photoId = photo.id
-//        
-//        cell.setNeedsUpdateConstraints()
-//        cell.updateConstraintsIfNeeded()
         
-        cell.photoLabel.text = "Corbin Jensen"
+        cell.photoLabel.text = "Billy Joel"
         cell.photoImageView.image = UIImage(named: "sample")
         cell.photoImageView.focusOnFaces = true
         
         return cell
     }
     
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBar.resignFirstResponder()
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
     }
-    */
-
 }

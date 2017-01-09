@@ -18,17 +18,28 @@ class FriendCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
     var gradient : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         return view
     }()
     
     var photoImageView : UIImageView = {
         let image = UIImageView()
+        return image
+    }()
+    
+    var moreInfo : UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "ellipsis")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -40,26 +51,23 @@ class FriendCollectionViewCell: UICollectionViewCell {
         photoImageView.clipsToBounds = true
         contentView.addSubview(photoImageView)
         
-        gradient.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.size.width, height: 80)
         contentView.addSubview(gradient)
         gradient.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         gradient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        gradient.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        gradient.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
         gradient.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         
-        let colorTop = UIColor.clear.cgColor
-        let colorBottom = UIColor.black.cgColor
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = gradient.frame
-        gradient.layer.addSublayer(gradientLayer)
+        self.addSubview(photoLabel)
+        photoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        photoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant:-10).isActive = true
+        photoLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        photoLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        gradient.addSubview(photoLabel)
-        photoLabel.centerXAnchor.constraint(equalTo: gradient.centerXAnchor).isActive = true
-        photoLabel.bottomAnchor.constraint(equalTo: gradient.bottomAnchor,constant:-10).isActive = true
-        photoLabel.widthAnchor.constraint(equalTo: gradient.widthAnchor).isActive = true
-        photoLabel.heightAnchor.constraint(equalToConstant: 14).isActive = true
+        self.addSubview(moreInfo)
+        moreInfo.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        moreInfo.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        moreInfo.heightAnchor.constraint(equalToConstant: 6).isActive = true
+        moreInfo.widthAnchor.constraint(equalToConstant: 28).isActive = true
         
     }
     
