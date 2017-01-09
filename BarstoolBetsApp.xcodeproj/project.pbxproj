@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320F45211E23D74D00B2469F /* UIImageView+FaceAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F45201E23D74D00B2469F /* UIImageView+FaceAware.swift */; };
 		323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E911DC7F86200674363 /* AppDelegate.swift */; };
 		323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E931DC7F86200674363 /* GroupsViewController.swift */; };
 		323B5E991DC7F86200674363 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E981DC7F86200674363 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		320F45201E23D74D00B2469F /* UIImageView+FaceAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+FaceAware.swift"; sourceTree = "<group>"; };
 		323B5E8E1DC7F86200674363 /* BarstoolBetsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarstoolBetsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		323B5E911DC7F86200674363 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		323B5E931DC7F86200674363 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		32B88B491E21603B004BE1C0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				320F45201E23D74D00B2469F /* UIImageView+FaceAware.swift */,
 				32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */,
 			);
 			name = Libraries;
@@ -191,6 +194,7 @@
 				32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */,
 				32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */,
 				323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */,
+				320F45211E23D74D00B2469F /* UIImageView+FaceAware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

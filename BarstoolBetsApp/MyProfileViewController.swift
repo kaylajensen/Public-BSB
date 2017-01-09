@@ -72,7 +72,6 @@ class MyProfileViewController: UIViewController {
     }
     
     func setupBackground() {
-        //view.backgroundColor = UIColor.init(netHex: 0x312308).withAlphaComponent(0.0)
         view.backgroundColor = UIColor.clear
         
         let profileImage = UIImage(named: "profileexample")
@@ -91,23 +90,30 @@ class MyProfileViewController: UIViewController {
     func setupProfileImage() {
         let size : CGFloat = 189
         
-        let outline = UIImage(named: "white_wheel")
-        let bg = UIImage(named: "profileexample")
-        let logo = UIImage(named: "filled_wheel")
-        let rect = CGRect(x: 0, y: 0, width: size, height: size)
-        UIGraphicsBeginImageContext(CGSize(width: size, height: size))
-        bg?.draw(in: rect)
-        logo?.draw(in: rect, blendMode: .destinationIn, alpha: 1.0)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+//        let outline = UIImage(named: "white_wheel")
+//        let bg = UIImage(named: "sample")
+//        let logo = UIImage(named: "filled_wheel")
+//        let rect = CGRect(x: 0, y: 0, width: size, height: size)
+//        UIGraphicsBeginImageContext(CGSize(width: size, height: size))
+//        bg?.draw(in: rect)
+//        logo?.draw(in: rect, blendMode: .destinationIn, alpha: 1.0)
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        
+//        UIGraphicsBeginImageContext(CGSize(width: size, height: size))
+//        newImage?.draw(in: rect)
+//        outline?.draw(in: rect, blendMode: .normal, alpha: 1.0)
+//        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        
+//        profileImageView = UIImageView(image: finalImage)
         
-        UIGraphicsBeginImageContext(CGSize(width: size, height: size))
-        newImage?.draw(in: rect)
-        outline?.draw(in: rect, blendMode: .normal, alpha: 1.0)
-        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        profileImageView = UIImageView(image: finalImage)
+        profileImageView = UIImageView(image: UIImage(named: "profileexample"))
+        profileImageView.frame = CGRect(x: 0, y: 0, width: size, height: size)
+        profileImageView.layer.cornerRadius = size/2
+        profileImageView.layer.masksToBounds = true
+        profileImageView.focusOnFaces = true
+        profileImageView.contentMode = .scaleAspectFill
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(profileImageView)
@@ -115,6 +121,7 @@ class MyProfileViewController: UIViewController {
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant:-100).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: size).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: size).isActive = true
+        
     }
     
     func setupProfileButtons() {
