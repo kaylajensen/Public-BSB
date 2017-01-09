@@ -13,6 +13,9 @@ private let reuseIdentifier = "Cell"
 class FriendsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     var collectionView: UICollectionView!
+    var filterArray : [String] = [String]()
+    
+    var names = ["Corbin Jensen","Kayla Jensen","Mackenzie Gillund","Eric Clapp","Allison Clapp","Michael Storto","Sarah Storo","Michael Maller","Mattie Stearns","Phil Crowley","Ally Crowley","Christopher Jensen","Bryce Kerney","Megan Jensen","Lyndsay Ross","Richard Ross","Carol Kerney","Craig Kerney","Lyndon Jensen","Debbie Jensen","Mitch Wilson","Emily Wilson","Stephanie Kilmer","Corbin Jensen","Kayla Jensen","Mackenzie Gillund","Eric Clapp","Allison Clapp","Michael Storto","Sarah Storo","Michael Maller","Mattie Stearns","Phil Crowley","Ally Crowley","Christopher Jensen","Bryce Kerney","Megan Jensen","Lyndsay Ross","Richard Ross","Carol Kerney","Craig Kerney","Lyndon Jensen","Debbie Jensen","Mitch Wilson","Emily Wilson","Stephanie Kilmer"]
     
     var titleLabel : UILabel = {
         let label = UILabel()
@@ -101,6 +104,7 @@ class FriendsCollectionViewController: UIViewController, UICollectionViewDataSou
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.white
+        collectionView.alwaysBounceVertical = true
         view.addSubview(collectionView)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -119,18 +123,36 @@ extension FriendsCollectionViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        
+        if filterArray.count == 0 {
+            return names.count
+        } else {
+            return filterArray.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FriendCollectionViewCell
         
-        cell.photoLabel.text = "Billy Joel"
-        cell.photoImageView.image = UIImage(named: "sample")
+        if filterArray.count == 0 {
+            cell.photoLabel.text = names[indexPath.row]
+        } else {
+            cell.photoLabel.text = filterArray[indexPath.row]
+        }
+        
+        if indexPath.row % 2 == 0 {
+            cell.photoImageView.image = UIImage(named: "sample")
+        } else {
+            cell.photoImageView.image = UIImage(named: "matt")
+        }
         cell.photoImageView.focusOnFaces = true
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("\(names[indexPath.row]) selected")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -139,5 +161,16 @@ extension FriendsCollectionViewController {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let text = searchText
+        filterArray.removeAll()
+        for name in names {
+            if name.contains(text) {
+                filterArray.append(name)
+            }
+        }
+        collectionView.reloadData()
     }
 }

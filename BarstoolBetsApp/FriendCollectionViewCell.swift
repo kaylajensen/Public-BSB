@@ -13,7 +13,7 @@ class FriendCollectionViewCell: UICollectionViewCell {
     
     var photoLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.init(name: "HelveticaNeue-Thin", size: 12)
+        label.font = UIFont.init(name: "HelveticaNeue-Thin", size: 13)
         label.textColor = UIColor.white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ class FriendCollectionViewCell: UICollectionViewCell {
         let image = UIImageView()
         image.image = UIImage(named: "ellipsis")
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -60,8 +60,8 @@ class FriendCollectionViewCell: UICollectionViewCell {
         self.addSubview(photoLabel)
         photoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         photoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant:-10).isActive = true
-        photoLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        photoLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        photoLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor,constant:-5).isActive = true
+        photoLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
         
         self.addSubview(moreInfo)
         moreInfo.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
