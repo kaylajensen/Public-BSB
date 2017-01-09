@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		320F45211E23D74D00B2469F /* UIImageView+FaceAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F45201E23D74D00B2469F /* UIImageView+FaceAware.swift */; };
+		320F45231E23DB8000B2469F /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F45221E23DB8000B2469F /* FriendsCollectionViewController.swift */; };
+		320F45251E23DC3D00B2469F /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F45241E23DC3D00B2469F /* FriendCollectionViewCell.swift */; };
 		323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E911DC7F86200674363 /* AppDelegate.swift */; };
 		323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E931DC7F86200674363 /* GroupsViewController.swift */; };
 		323B5E991DC7F86200674363 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E981DC7F86200674363 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		320F45201E23D74D00B2469F /* UIImageView+FaceAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+FaceAware.swift"; sourceTree = "<group>"; };
+		320F45221E23DB8000B2469F /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
+		320F45241E23DC3D00B2469F /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		323B5E8E1DC7F86200674363 /* BarstoolBetsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarstoolBetsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		323B5E911DC7F86200674363 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		323B5E931DC7F86200674363 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +71,8 @@
 			isa = PBXGroup;
 			children = (
 				323B5E911DC7F86200674363 /* AppDelegate.swift */,
+				320F45221E23DB8000B2469F /* FriendsCollectionViewController.swift */,
+				320F45241E23DC3D00B2469F /* FriendCollectionViewCell.swift */,
 				32F5B3001E21619300D5C157 /* Profiles */,
 				32B88B4B1E21608D004BE1C0 /* Groups */,
 				323B5E981DC7F86200674363 /* Assets.xcassets */,
@@ -188,12 +194,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				320F45251E23DC3D00B2469F /* FriendCollectionViewCell.swift in Sources */,
 				32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */,
 				323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */,
 				32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */,
 				32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */,
 				32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */,
 				323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */,
+				320F45231E23DB8000B2469F /* FriendsCollectionViewController.swift in Sources */,
 				320F45211E23D74D00B2469F /* UIImageView+FaceAware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

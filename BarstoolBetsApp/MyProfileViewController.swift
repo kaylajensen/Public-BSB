@@ -36,6 +36,7 @@ class MyProfileViewController: UIViewController {
         button.setTitle("Friends", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 20)
+        button.addTarget(self, action: #selector(openFriendsView(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -144,9 +145,14 @@ class MyProfileViewController: UIViewController {
         view.addSubview(exitButton)
         exitButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-10).isActive = true
         exitButton.topAnchor.constraint(equalTo: view.topAnchor,constant:10).isActive = true
-        
     }
-    
+}
 
-
+// MARK: Handlers
+extension MyProfileViewController {
+    func openFriendsView(sender: AnyObject) {
+        print("did click open friends view controller")
+        let vc = FriendsCollectionViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
 }
