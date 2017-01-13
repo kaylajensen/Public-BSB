@@ -43,8 +43,9 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("+", for: .normal)
-        let font = UIFont(name: "HelveticaNeue-UltraLight", size: 47.0)!
-        let color = UIColor(netHex: 0xF56D6A)
+        let font = UIFont(name: "HelveticaNeue-UltraLight", size: 30.0)!
+        //let color = UIColor(netHex: 0xF56D6A)
+        let color = UIColor.white
         button.setTitleColor(color, for: .normal)
         button.titleLabel!.font = font
         button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
@@ -75,12 +76,26 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = false
         view.layer.masksToBounds = false
-        view.layer.cornerRadius = 17.5
+        view.layer.cornerRadius = 8.5
         view.backgroundColor = UIColor.init(netHex: 0xF8926D)
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = 0.8
         view.layer.shadowOffset = CGSize.zero
         view.layer.shadowRadius = 4
+        return view
+    }()
+    
+    var createGroupContainerView : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = false
+        view.layer.masksToBounds = false
+        view.layer.cornerRadius = 17
+        view.backgroundColor = UIColor.init(netHex: 0xF56D6A)
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        view.layer.shadowOpacity = 0.4
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowRadius = 1
         return view
     }()
     
@@ -90,7 +105,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         button.setTitle("EPIC", for: .normal)
         button.setTitleColor(UIColor.init(netHex: 0xFBC171), for: .normal)
         button.addTarget(self, action: #selector(epicBetsPressed(sender:)), for: .touchUpInside)
-        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
+        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 19)
         return button
     }()
     
@@ -99,16 +114,19 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Groups", for: .normal)
         button.setTitleColor(UIColor.init(netHex: 0xFAA86F), for: .normal)
-        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
+        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 19)
         return button
     }()
     
     lazy var profileButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Me", for: .normal)
-        button.setTitleColor(UIColor.init(netHex: 0xF56D6A), for: .normal)
-        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 19)
+        button.setTitle("Jessica Jones", for: .normal)
+        //button.setTitleColor(UIColor.init(netHex: 0xF56D6A), for: .normal)
+        button.setTitleColor(UIColor.init(netHex: 0xB1B1B1), for: .normal)
+        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 19)
+        button.titleLabel!.textAlignment = .left
+        button.contentHorizontalAlignment = .left
         button.addTarget(self, action: #selector(myProfilePressed(sender:)), for: .touchUpInside)
         return button
     }()
@@ -128,10 +146,12 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         setupCollectionView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(GroupsViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        //setupCreateGroup()
         setupWheelMenu()
     }
-    
+}
+
+// MARK : Handlers
+extension GroupsViewController {
     func myProfilePressed(sender : AnyObject) {
         let vc = MyProfileViewController()
         vc.modalPresentationStyle = .overCurrentContext
@@ -194,7 +214,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         epicLogo.rightAnchor.constraint(equalTo: playerController.view.rightAnchor,constant:-10).isActive = true
         epicLogo.heightAnchor.constraint(equalToConstant: 15).isActive = true
         epicLogo.widthAnchor.constraint(equalToConstant: 42).isActive = true
-
+        
         playerController.view.addSubview(opagueOverlay)
         opagueOverlay.centerXAnchor.constraint(equalTo: playerController.view.centerXAnchor).isActive = true
         opagueOverlay.bottomAnchor.constraint(equalTo: playerController.view.bottomAnchor,constant:-10).isActive = true
@@ -318,7 +338,7 @@ extension GroupsViewController {
         collectionView.heightAnchor.constraint(equalToConstant: 350).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor,constant:100).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         self.setupLayout()
         self.currentPage = 0
@@ -341,50 +361,28 @@ extension GroupsViewController {
         }
     }
     
-    func setupCreateGroup() {
-        view.addSubview(createNewGroup)
-        createNewGroup.heightAnchor.constraint(equalToConstant: 54).isActive = true
-        createNewGroup.widthAnchor.constraint(equalToConstant: 29).isActive = true
-        createNewGroup.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        createNewGroup.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-    
     func setupWheelMenu() {
         view.addSubview(wheelImageView)
         wheelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         let approxWidth = view.frame.width
-        wheelImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: approxWidth/1.9).isActive = true
+        wheelImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: approxWidth/1.55).isActive = true
         wheelImageView.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         wheelImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(didRotateWheel(sender:)))
         wheelImageView.addGestureRecognizer(panGesture)
         
-        view.addSubview(notificationView)
-        notificationView.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        notificationView.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        notificationView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-21.5).isActive = true
-        notificationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(createGroupContainerView)
+        createGroupContainerView.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-25).isActive = true
+        createGroupContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-20).isActive = true
+        createGroupContainerView.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        createGroupContainerView.widthAnchor.constraint(equalToConstant: 34).isActive = true
         
-        notificationView.addSubview(numNotificationsLabel)
-        numNotificationsLabel.centerXAnchor.constraint(equalTo: notificationView.centerXAnchor).isActive = true
-        numNotificationsLabel.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
-        numNotificationsLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        numNotificationsLabel.widthAnchor.constraint(equalToConstant: 9).isActive = true
-        
-        notificationView.isHidden = true
-        
-        view.addSubview(createNewGroup)
-        createNewGroup.heightAnchor.constraint(equalToConstant: 54).isActive = true
-        createNewGroup.widthAnchor.constraint(equalToConstant: 29).isActive = true
-        createNewGroup.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
-        createNewGroup.centerXAnchor.constraint(equalTo: notificationView.centerXAnchor).isActive = true
-        
-        view.addSubview(epicButton)
-        epicButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-5).isActive = true
-        epicButton.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
-        epicButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        epicButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        createGroupContainerView.addSubview(createNewGroup)
+        createNewGroup.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        createNewGroup.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        createNewGroup.centerYAnchor.constraint(equalTo: createGroupContainerView.centerYAnchor,constant:-3).isActive = true
+        createNewGroup.centerXAnchor.constraint(equalTo: createGroupContainerView.centerXAnchor).isActive = true
         
         view.addSubview(groupsButton)
         groupsButton.topAnchor.constraint(equalTo: wheelImageView.topAnchor,constant:5).isActive = true
@@ -392,11 +390,23 @@ extension GroupsViewController {
         groupsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         groupsButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
+        view.addSubview(epicButton)
+        epicButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:25).isActive = true
+        epicButton.bottomAnchor.constraint(equalTo: createGroupContainerView.bottomAnchor).isActive = true
+        epicButton.heightAnchor.constraint(equalTo: createGroupContainerView.heightAnchor).isActive = true
+        epicButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
         view.addSubview(profileButton)
-        profileButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:5).isActive = true
-        profileButton.centerYAnchor.constraint(equalTo: notificationView.centerYAnchor).isActive = true
-        profileButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        profileButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        profileButton.topAnchor.constraint(equalTo: view.topAnchor,constant:35).isActive = true
+        profileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        profileButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        profileButton.widthAnchor.constraint(equalTo: view.widthAnchor,constant:-60).isActive = true
+        
+        view.addSubview(notificationView)
+        notificationView.heightAnchor.constraint(equalToConstant: 17).isActive = true
+        notificationView.widthAnchor.constraint(equalToConstant: 17).isActive = true
+        notificationView.bottomAnchor.constraint(equalTo: profileButton.topAnchor,constant:4).isActive = true
+        notificationView.rightAnchor.constraint(equalTo: profileButton.leftAnchor,constant:4).isActive = true
     }
 }
 
