@@ -103,6 +103,7 @@ class FriendsCollectionViewController: UIViewController, UICollectionViewDataSou
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.white
         collectionView.alwaysBounceVertical = true
+        collectionView.showsVerticalScrollIndicator = false
         view.addSubview(collectionView)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false

@@ -65,7 +65,7 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("+", for: .normal)
         let font = UIFont(name: "HelveticaNeue-Thin", size: 30.0)!
-        let color = UIColor(netHex: 0xF56D6A)
+        let color = BSB_RED
         button.setTitleColor(color, for: .normal)
         button.setTitleColor(UIColor.lightGray, for: .disabled)
         button.titleLabel!.font = font
@@ -93,7 +93,9 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         if text.isEmpty {
             createNewGroup.isEnabled = false
         } else {
-            createNewGroup.isEnabled = true
+            if selectedNames.count != 0 {
+                createNewGroup.isEnabled = true
+            }
         }
     }
     
@@ -210,6 +212,7 @@ extension CreateGroupViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.white
         collectionView.alwaysBounceVertical = true
+        collectionView.showsVerticalScrollIndicator = false
         view.addSubview(collectionView)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -224,6 +227,13 @@ extension CreateGroupViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
+        if selectedNames.count == 0 {
+            cell.textLabel?.text = "+ Select friends below to add them to your group"
+            cell.textLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 15)
+            cell.textLabel?.textAlignment = .center
+            return cell
+        }
+        
         cell.textLabel?.text = selectedNames[indexPath.row]
         cell.textLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 16)
         cell.textLabel?.textAlignment = .center
@@ -236,10 +246,17 @@ extension CreateGroupViewController {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if selectedNames.count == 0 {
+            return 1
+        }
         return selectedNames.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if selectedNames.count == 0 {
+            return 120
+        }
+        
         return 19
     }
 }
@@ -273,10 +290,14 @@ extension CreateGroupViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let selectedName = names[indexPath.row]
+        var i = 0
         for s in selectedNames {
             if s == selectedName {
+                selectedNames.remove(at: i)
+                tableView.reloadData()
                 return
             }
+            i = i + 1
         }
         
         selectedNames.insert(selectedName, at: 0)
