@@ -15,8 +15,6 @@ class FriendsCollectionViewController: UIViewController, UICollectionViewDataSou
     var collectionView: UICollectionView!
     var filterArray : [String] = [String]()
     
-    var names = ["Corbin Jensen","Kayla Jensen","Mackenzie Gillund","Eric Clapp","Allison Clapp","Michael Storto","Sarah Storo","Michael Maller","Mattie Stearns","Phil Crowley","Ally Crowley","Christopher Jensen","Bryce Kerney","Megan Jensen","Lyndsay Ross","Richard Ross","Carol Kerney","Craig Kerney","Lyndon Jensen","Debbie Jensen","Mitch Wilson","Emily Wilson","Stephanie Kilmer","Corbin Jensen","Kayla Jensen","Mackenzie Gillund","Eric Clapp","Allison Clapp","Michael Storto","Sarah Storo","Michael Maller","Mattie Stearns","Phil Crowley","Ally Crowley","Christopher Jensen","Bryce Kerney","Megan Jensen","Lyndsay Ross","Richard Ross","Carol Kerney","Craig Kerney","Lyndon Jensen","Debbie Jensen","Mitch Wilson","Emily Wilson","Stephanie Kilmer"]
-    
     var titleLabel : UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black

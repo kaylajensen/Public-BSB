@@ -16,6 +16,8 @@
 		323B5E9C1DC7F86200674363 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */; };
 		323B5EA61DC8047E00674363 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 323B5EA51DC8047E00674363 /* launch.png */; };
 		32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC4E1E29560100F556BC /* EpicViewController.swift */; };
+		32A3BC511E296ED300F556BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC501E296ED300F556BC /* Constants.swift */; };
+		32A3BC531E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC521E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift */; };
 		32B88B441E1FC08D004BE1C0 /* snippet.mov in Resources */ = {isa = PBXBuildFile; fileRef = 32B88B431E1FC08D004BE1C0 /* snippet.mov */; };
 		32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */; };
 		32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */; };
@@ -37,6 +39,8 @@
 		323B5E9D1DC7F86200674363 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		323B5EA51DC8047E00674363 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		32A3BC4E1E29560100F556BC /* EpicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpicViewController.swift; sourceTree = "<group>"; };
+		32A3BC501E296ED300F556BC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		32A3BC521E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupFriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		32B88B431E1FC08D004BE1C0 /* snippet.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = snippet.mov; sourceTree = "<group>"; };
 		32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 				323B5E911DC7F86200674363 /* AppDelegate.swift */,
 				320F45221E23DB8000B2469F /* FriendsCollectionViewController.swift */,
 				320F45241E23DC3D00B2469F /* FriendCollectionViewCell.swift */,
+				32A3BC521E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift */,
 				32F5B3001E21619300D5C157 /* Profiles */,
 				32B88B4B1E21608D004BE1C0 /* Groups */,
 				323B5E981DC7F86200674363 /* Assets.xcassets */,
@@ -107,6 +112,7 @@
 				32B88B431E1FC08D004BE1C0 /* snippet.mov */,
 				323B5EA51DC8047E00674363 /* launch.png */,
 				323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */,
+				32A3BC501E296ED300F556BC /* Constants.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -272,7 +278,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32A3BC531E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift in Sources */,
 				320F45251E23DC3D00B2469F /* FriendCollectionViewCell.swift in Sources */,
+				32A3BC511E296ED300F556BC /* Constants.swift in Sources */,
 				32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */,
 				323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */,
 				32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */,

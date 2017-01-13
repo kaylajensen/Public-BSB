@@ -8,7 +8,12 @@
 
 import UIKit
 
-class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationBarDelegate, UITextFieldDelegate {
+class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var reuseIdentifier = "createFriendsCell"
+    var tableView : UITableView!
+    var collectionView : UICollectionView!
+    var selectedNames = [String]()
     
     var titleLabel : UILabel = {
         let label = UILabel()
@@ -42,6 +47,13 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
     }()
     
     var gradientSeparator : UIImageView = {
+        let view = UIImageView(image: UIImage(named: "gradient_line"))
+        view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var friendsGradientSeparator : UIImageView = {
         let view = UIImageView(image: UIImage(named: "gradient_line"))
         view.contentMode = .scaleAspectFill
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -119,10 +131,10 @@ extension CreateGroupViewController {
     
     func setupBasicView() {
         view.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: view.topAnchor,constant:15).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier:0.6).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant:54).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant:20).isActive = true
         
         view.addSubview(createNewGroup)
         createNewGroup.topAnchor.constraint(equalTo: view.topAnchor,constant:15).isActive = true
@@ -157,5 +169,123 @@ extension CreateGroupViewController {
         gradientSeparator.topAnchor.constraint(equalTo: friendsAddedLabel.bottomAnchor,constant:4).isActive = true
         gradientSeparator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         gradientSeparator.widthAnchor.constraint(equalTo: groupNameTextView.widthAnchor).isActive = true
+        
+        let tableViewFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        tableView = UITableView(frame: tableViewFrame, style: .plain)
+        tableView.backgroundColor = UIColor.white
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: gradientSeparator.bottomAnchor,constant:8).isActive = true
+        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        tableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        view.addSubview(friendsGradientSeparator)
+        friendsGradientSeparator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        friendsGradientSeparator.topAnchor.constraint(equalTo: tableView.bottomAnchor,constant:8).isActive = true
+        friendsGradientSeparator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        friendsGradientSeparator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        setupCollectionView()
+    }
+    
+    func setupCollectionView() {
+        let screenWidth = view.frame.size.width - 7.5
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        flowLayout.itemSize = CGSize(width: screenWidth/4, height: screenWidth/4)
+        flowLayout.minimumInteritemSpacing = 2.5
+        flowLayout.minimumLineSpacing = 2.5
+        
+        let collectionViewFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.height/2)
+        collectionView = UICollectionView(frame: collectionViewFrame, collectionViewLayout: flowLayout)
+        collectionView.register(CreateGroupFriendCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.white
+        collectionView.alwaysBounceVertical = true
+        view.addSubview(collectionView)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: friendsGradientSeparator.bottomAnchor,constant:8).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
+
+extension CreateGroupViewController {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        
+        cell.textLabel?.text = selectedNames[indexPath.row]
+        cell.textLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 16)
+        cell.textLabel?.textAlignment = .center
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return selectedNames.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 19
+    }
+}
+
+// MARK: CollectionView Delegate and DataSource
+extension CreateGroupViewController {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return names.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CreateGroupFriendCollectionViewCell
+        
+        cell.photoLabel.text = names[indexPath.row]
+        
+        if indexPath.row % 2 == 0 {
+            cell.photoImageView.image = UIImage(named: "sample")
+        } else {
+            cell.photoImageView.image = UIImage(named: "matt")
+        }
+        cell.photoImageView.focusOnFaces = true
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectedName = names[indexPath.row]
+        for s in selectedNames {
+            if s == selectedName {
+                return
+            }
+        }
+        
+        selectedNames.insert(selectedName, at: 0)
+        tableView.reloadData()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        groupNameTextView.resignFirstResponder()
+    }
+}
+
+
