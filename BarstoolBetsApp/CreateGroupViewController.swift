@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateGroupViewController: UIViewController {
+class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationBarDelegate {
     
     var titleLabel : UILabel = {
         let label = UILabel()
@@ -50,16 +50,47 @@ class CreateGroupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupSwipeControl()
 
         view.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.tintColor = UIColor.black
-        //self.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(createGroupPressed(sender:)))
+
+        self.navigationController?.navigationBar.isHidden = true
         
         setupBasicView()
     }
     
+    func swipeRight(recognizer: UISwipeGestureRecognizer) {
+        self.tabBarController?.selectedIndex = 2
+    }
+    
+    func swipeLeft(recognizer: UISwipeGestureRecognizer) {
+        self.tabBarController?.selectedIndex = 1
+    }
+    
     func createGroupPressed(sender : AnyObject) {
         
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        groupNameTextView.resignFirstResponder()
+    }
+
+}
+
+// MARK : Setup
+extension CreateGroupViewController {
+    func setupSwipeControl() {
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(recognizer:)))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        swipeLeft.delegate = self
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(recognizer:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        swipeRight.delegate = self
     }
     
     func setupBasicView() {
@@ -97,9 +128,4 @@ class CreateGroupViewController: UIViewController {
         gradientSeparator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         gradientSeparator.widthAnchor.constraint(equalTo: groupNameTextView.widthAnchor).isActive = true
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        groupNameTextView.resignFirstResponder()
-    }
-
 }

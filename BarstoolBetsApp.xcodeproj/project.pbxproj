@@ -15,14 +15,17 @@
 		323B5E991DC7F86200674363 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E981DC7F86200674363 /* Assets.xcassets */; };
 		323B5E9C1DC7F86200674363 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */; };
 		323B5EA61DC8047E00674363 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 323B5EA51DC8047E00674363 /* launch.png */; };
+		32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC4E1E29560100F556BC /* EpicViewController.swift */; };
 		32B88B441E1FC08D004BE1C0 /* snippet.mov in Resources */ = {isa = PBXBuildFile; fileRef = 32B88B431E1FC08D004BE1C0 /* snippet.mov */; };
 		32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */; };
 		32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */; };
 		32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */; };
 		32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */; };
+		3FD413556327E8C77DB6BE44 /* Pods_BarstoolBetsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A539984C7E8257E3E3A5E7D1 /* Pods_BarstoolBetsApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2895775CD6C41DED9B25EA69 /* Pods-BarstoolBetsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarstoolBetsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarstoolBetsApp/Pods-BarstoolBetsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		320F45201E23D74D00B2469F /* UIImageView+FaceAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+FaceAware.swift"; sourceTree = "<group>"; };
 		320F45221E23DB8000B2469F /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		320F45241E23DC3D00B2469F /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -33,11 +36,14 @@
 		323B5E9B1DC7F86200674363 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		323B5E9D1DC7F86200674363 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		323B5EA51DC8047E00674363 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		32A3BC4E1E29560100F556BC /* EpicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpicViewController.swift; sourceTree = "<group>"; };
 		32B88B431E1FC08D004BE1C0 /* snippet.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = snippet.mov; sourceTree = "<group>"; };
 		32B88B451E1FDAB7004BE1C0 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		32F948D51E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
+		3FE414C39FEB9314DCBEB913 /* Pods-BarstoolBetsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarstoolBetsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarstoolBetsApp/Pods-BarstoolBetsApp.release.xcconfig"; sourceTree = "<group>"; };
+		A539984C7E8257E3E3A5E7D1 /* Pods_BarstoolBetsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BarstoolBetsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD413556327E8C77DB6BE44 /* Pods_BarstoolBetsApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +63,8 @@
 			children = (
 				323B5E901DC7F86200674363 /* BarstoolBetsApp */,
 				323B5E8F1DC7F86200674363 /* Products */,
+				A4097BE93C3A2D13EDF802BB /* Pods */,
+				DF3A09BD7C7DE2DDAB4A82E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				323B5E931DC7F86200674363 /* GroupsViewController.swift */,
+				32A3BC4E1E29560100F556BC /* EpicViewController.swift */,
 				32B88B471E215FE5004BE1C0 /* CreateGroupViewController.swift */,
 				32F948D31E1DF54600AFEA71 /* CarouselCollectionViewCell.swift */,
 			);
@@ -120,6 +130,23 @@
 			name = Profiles;
 			sourceTree = "<group>";
 		};
+		A4097BE93C3A2D13EDF802BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2895775CD6C41DED9B25EA69 /* Pods-BarstoolBetsApp.debug.xcconfig */,
+				3FE414C39FEB9314DCBEB913 /* Pods-BarstoolBetsApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DF3A09BD7C7DE2DDAB4A82E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A539984C7E8257E3E3A5E7D1 /* Pods_BarstoolBetsApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -127,9 +154,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 323B5EA01DC7F86200674363 /* Build configuration list for PBXNativeTarget "BarstoolBetsApp" */;
 			buildPhases = (
+				E6F3D437CDE26E69FA030174 /* [CP] Check Pods Manifest.lock */,
 				323B5E8A1DC7F86200674363 /* Sources */,
 				323B5E8B1DC7F86200674363 /* Frameworks */,
 				323B5E8C1DC7F86200674363 /* Resources */,
+				8C2647789EB5744F31D15A9A /* [CP] Embed Pods Frameworks */,
+				6B5FC58481413E9DB1E6F96B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,6 +219,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6B5FC58481413E9DB1E6F96B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarstoolBetsApp/Pods-BarstoolBetsApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C2647789EB5744F31D15A9A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarstoolBetsApp/Pods-BarstoolBetsApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6F3D437CDE26E69FA030174 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		323B5E8A1DC7F86200674363 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -199,6 +277,7 @@
 				323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */,
 				32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */,
 				32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */,
+				32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */,
 				32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */,
 				323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */,
 				320F45231E23DB8000B2469F /* FriendsCollectionViewController.swift in Sources */,
@@ -315,6 +394,7 @@
 		};
 		323B5EA11DC7F86200674363 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2895775CD6C41DED9B25EA69 /* Pods-BarstoolBetsApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A6MQZ7F58L;
@@ -328,6 +408,7 @@
 		};
 		323B5EA21DC7F86200674363 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FE414C39FEB9314DCBEB913 /* Pods-BarstoolBetsApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A6MQZ7F58L;

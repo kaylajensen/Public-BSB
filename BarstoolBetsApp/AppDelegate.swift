@@ -15,16 +15,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        
         let nav1 = UINavigationController()
-        let vc = GroupsViewController()
-        nav1.viewControllers = [vc]
-        window?.rootViewController = nav1
+        let epicVC = EpicViewController()
+        nav1.viewControllers = [epicVC]
+        
+        let nav2 = UINavigationController()
+        let groupVC = GroupsViewController()
+        nav2.viewControllers = [groupVC]
+        
+        let nav3 = UINavigationController()
+        let newGroupVC = CreateGroupViewController()
+        nav3.viewControllers = [newGroupVC]
+        
+        let tabs = UITabBarController()
+        tabs.tabBar.isHidden = true
+        tabs.selectedIndex = 1
+        tabs.viewControllers = [nav1,nav2,nav3]
+        tabs.hidesBottomBarWhenPushed = true
+
+        window?.rootViewController = tabs
+        
         window?.makeKeyAndVisible()
 
         application.isStatusBarHidden = true
+        
         return true
     }
 
