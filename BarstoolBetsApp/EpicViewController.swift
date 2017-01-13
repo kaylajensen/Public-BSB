@@ -19,7 +19,7 @@ class EpicViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = BSB_ORANGE
         self.navigationController?.navigationBar.isHidden = true
         
         setupEpicView()

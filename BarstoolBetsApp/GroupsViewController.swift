@@ -327,16 +327,15 @@ extension GroupsViewController {
         epicButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         view.addSubview(profileButton)
-        profileButton.topAnchor.constraint(equalTo: view.topAnchor,constant:35).isActive = true
-        profileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        profileButton.widthAnchor.constraint(equalTo: view.widthAnchor,constant:-60).isActive = true
+        profileButton.topAnchor.constraint(equalTo: view.topAnchor,constant:27).isActive = true
+        profileButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:27).isActive = true
+        profileButton.sizeToFit()
         
         view.addSubview(notificationView)
         notificationView.heightAnchor.constraint(equalToConstant: 12).isActive = true
         notificationView.widthAnchor.constraint(equalToConstant: 12).isActive = true
-        notificationView.bottomAnchor.constraint(equalTo: profileButton.topAnchor,constant:4).isActive = true
-        notificationView.rightAnchor.constraint(equalTo: profileButton.leftAnchor,constant:4).isActive = true
+        notificationView.bottomAnchor.constraint(equalTo: profileButton.topAnchor,constant:12).isActive = true
+        notificationView.leftAnchor.constraint(equalTo: profileButton.rightAnchor,constant:-3).isActive = true
     }
 }
 
@@ -364,6 +363,15 @@ extension UIImage {
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
+    }
+}
+
+extension String {
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        
+        return boundingBox.height
     }
 }
 

@@ -282,6 +282,7 @@ extension CreateGroupViewController {
         } else {
             cell.photoImageView.image = UIImage(named: "matt")
         }
+        
         cell.photoImageView.focusOnFaces = true
         
         return cell
