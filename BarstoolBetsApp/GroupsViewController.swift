@@ -71,7 +71,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = false
         view.layer.masksToBounds = false
-        view.layer.cornerRadius = 8.5
+        view.layer.cornerRadius = 6
         view.backgroundColor = UIColor.init(netHex: 0xF8926D)
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = 0.8
@@ -253,7 +253,7 @@ extension GroupsViewController {
         collectionViewLayout = UPCarouselFlowLayout()
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: 225)
+        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: 240)
         
         let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 250)
         collectionView = UICollectionView(frame: frame, collectionViewLayout: collectionViewLayout)
@@ -268,7 +268,7 @@ extension GroupsViewController {
         collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant:-75).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant:-40).isActive = true
         
         self.setupLayout()
         self.currentPage = 0
@@ -333,8 +333,8 @@ extension GroupsViewController {
         profileButton.widthAnchor.constraint(equalTo: view.widthAnchor,constant:-60).isActive = true
         
         view.addSubview(notificationView)
-        notificationView.heightAnchor.constraint(equalToConstant: 17).isActive = true
-        notificationView.widthAnchor.constraint(equalToConstant: 17).isActive = true
+        notificationView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        notificationView.widthAnchor.constraint(equalToConstant: 12).isActive = true
         notificationView.bottomAnchor.constraint(equalTo: profileButton.topAnchor,constant:4).isActive = true
         notificationView.rightAnchor.constraint(equalTo: profileButton.leftAnchor,constant:4).isActive = true
     }

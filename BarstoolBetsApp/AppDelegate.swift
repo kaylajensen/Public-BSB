@@ -32,12 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let tabs = UITabBarController()
         tabs.tabBar.isHidden = true
-        tabs.selectedIndex = 1
         tabs.viewControllers = [nav1,nav2,nav3]
+        tabs.selectedViewController = nav2
         tabs.hidesBottomBarWhenPushed = true
 
         window?.rootViewController = tabs
-        window?.rootViewController?.tabBarController?.selectedIndex = 1
         
         window?.makeKeyAndVisible()
 
