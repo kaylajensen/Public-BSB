@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationBarDelegate {
+class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationBarDelegate, UITextFieldDelegate {
     
     var titleLabel : UILabel = {
         let label = UILabel()
@@ -47,6 +47,19 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    lazy var createNewGroup : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("+", for: .normal)
+        let font = UIFont(name: "HelveticaNeue-Thin", size: 30.0)!
+        let color = UIColor(netHex: 0xF56D6A)
+        button.setTitleColor(color, for: .normal)
+        button.setTitleColor(UIColor.lightGray, for: .disabled)
+        button.titleLabel!.font = font
+        button.addTarget(self, action: #selector(createGroupPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +67,22 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         setupSwipeControl()
 
         view.backgroundColor = UIColor.white
-
         self.navigationController?.navigationBar.isHidden = true
         
+        createNewGroup.isEnabled = false
+        groupNameTextView.delegate = self
+        groupNameTextView.addTarget(self, action: #selector(checkIfGroupNameEntered), for: .editingChanged)
+        
         setupBasicView()
+    }
+    
+    func checkIfGroupNameEntered() {
+        let text = groupNameTextView.text!
+        if text.isEmpty {
+            createNewGroup.isEnabled = false
+        } else {
+            createNewGroup.isEnabled = true
+        }
     }
     
     func swipeRight(recognizer: UISwipeGestureRecognizer) {
@@ -69,7 +94,7 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
     
     func createGroupPressed(sender : AnyObject) {
-        
+        print("create group button pressed")
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -81,7 +106,6 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
 // MARK : Setup
 extension CreateGroupViewController {
     func setupSwipeControl() {
-        
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(recognizer:)))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
@@ -99,6 +123,12 @@ extension CreateGroupViewController {
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier:0.6).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant:54).isActive = true
+        
+        view.addSubview(createNewGroup)
+        createNewGroup.topAnchor.constraint(equalTo: view.topAnchor,constant:15).isActive = true
+        createNewGroup.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-20).isActive = true
+        createNewGroup.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        createNewGroup.widthAnchor.constraint(equalToConstant: 20).isActive = true
         
         view.addSubview(groupNameTextView)
         groupNameTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant:25).isActive = true

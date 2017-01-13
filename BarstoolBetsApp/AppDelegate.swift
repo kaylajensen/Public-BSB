@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabs.hidesBottomBarWhenPushed = true
 
         window?.rootViewController = tabs
+        window?.rootViewController?.tabBarController?.selectedIndex = 1
         
         window?.makeKeyAndVisible()
 

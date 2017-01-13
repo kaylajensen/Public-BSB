@@ -117,6 +117,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Jessica Jones", for: .normal)
+        //button.setTitleColor(UIColor.init(netHex: 0xF56D6A), for: .normal)
         button.setTitleColor(UIColor.init(netHex: 0xB1B1B1), for: .normal)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 19)
         button.titleLabel!.textAlignment = .left
@@ -252,9 +253,9 @@ extension GroupsViewController {
         collectionViewLayout = UPCarouselFlowLayout()
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: 250)
+        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: 225)
         
-        let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 325)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 250)
         collectionView = UICollectionView(frame: frame, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(CarouselCollectionViewCell.self, forCellWithReuseIdentifier: CarouselCollectionViewCell.identifier)
@@ -264,10 +265,10 @@ extension GroupsViewController {
         
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant:-75).isActive = true
         
         self.setupLayout()
         self.currentPage = 0
