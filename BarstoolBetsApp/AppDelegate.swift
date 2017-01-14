@@ -26,14 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let groupVC = GroupsViewController()
         nav2.viewControllers = [groupVC]
         
-        let nav3 = UINavigationController()
-        let newGroupVC = CreateGroupViewController()
-        nav3.viewControllers = [newGroupVC]
-        
         let tabs = UITabBarController()
         tabs.tabBar.isHidden = true
-        tabs.viewControllers = [nav1,nav2,nav3]
-        tabs.selectedViewController = nav2
+        tabs.viewControllers = [nav2,nav1]
         tabs.hidesBottomBarWhenPushed = true
 
         window?.rootViewController = tabs

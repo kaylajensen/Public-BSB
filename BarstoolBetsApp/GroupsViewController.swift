@@ -30,10 +30,6 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         return pageSize
     }
     
-    fileprivate var orientation: UIDeviceOrientation {
-        return UIDevice.current.orientation
-    }
-    
     lazy var newGroupTabButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +87,8 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         setupSwipeControl()
 
         view.backgroundColor = UIColor.white
@@ -103,8 +101,6 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         spinAnimation = CABasicAnimation()
         
         setupCollectionView()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(GroupsViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         setupTabIcons()
         //setupWheelMenu()
@@ -125,7 +121,9 @@ extension GroupsViewController {
     }
     
     func createGroupButtonPressed(sender : AnyObject) {
-        self.tabBarController?.selectedIndex = 2
+        
+        let createGroupViewController = CreateGroupViewController()
+        self.navigationController?.pushViewController(createGroupViewController, animated: true)
     }
     
     func didRotateWheel(sender : UIPanGestureRecognizer) {
@@ -205,7 +203,7 @@ extension GroupsViewController {
     }
     
     func swipeRight(recognizer: UISwipeGestureRecognizer) {
-        self.tabBarController?.selectedIndex = 2
+        self.tabBarController?.selectedIndex = 1
     }
     
     func swipeLeft(recognizer: UISwipeGestureRecognizer) {
@@ -266,9 +264,10 @@ extension GroupsViewController {
         collectionViewLayout = UPCarouselFlowLayout()
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: 240)
+        collectionViewLayout.itemSize = CGSize(width: view.frame.width, height: 250)
+        collectionViewLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 50)
         
-        let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 250)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 260)
         collectionView = UICollectionView(frame: frame, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(CarouselCollectionViewCell.self, forCellWithReuseIdentifier: CarouselCollectionViewCell.identifier)
@@ -278,30 +277,12 @@ extension GroupsViewController {
         
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 260).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant:-20).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        self.setupLayout()
         self.currentPage = 0
-    }
-    
-    fileprivate func setupLayout() {
-        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
-        layout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 30)
-    }
-    
-    @objc fileprivate func rotationDidChange() {
-        guard !orientation.isFlat else { return }
-        let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
-        let direction: UICollectionViewScrollDirection = UIDeviceOrientationIsPortrait(orientation) ? .horizontal : .vertical
-        layout.scrollDirection = direction
-        if currentPage > 0 {
-            let indexPath = IndexPath(item: currentPage, section: 0)
-            let scrollPosition: UICollectionViewScrollPosition = UIDeviceOrientationIsPortrait(orientation) ? .centeredHorizontally : .centeredVertically
-            self.collectionView.scrollToItem(at: indexPath, at: scrollPosition, animated: false)
-        }
     }
 }
 

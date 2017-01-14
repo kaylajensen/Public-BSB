@@ -72,6 +72,14 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         button.addTarget(self, action: #selector(createGroupPressed(sender:)), for: .touchUpInside)
         return button
     }()
+    
+    lazy var backButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "back_button"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +115,11 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         self.tabBarController?.selectedIndex = 1
     }
     
+    func backButtonPressed(sender : AnyObject) {
+        print("backbutton pressed")
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
     func createGroupPressed(sender : AnyObject) {
         print("create group button pressed")
     }
@@ -139,10 +152,16 @@ extension CreateGroupViewController {
         titleLabel.heightAnchor.constraint(equalToConstant:20).isActive = true
         
         view.addSubview(createNewGroup)
-        createNewGroup.topAnchor.constraint(equalTo: view.topAnchor,constant:15).isActive = true
+        createNewGroup.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         createNewGroup.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-20).isActive = true
         createNewGroup.heightAnchor.constraint(equalToConstant: 20).isActive = true
         createNewGroup.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        view.addSubview(backButton)
+        backButton.centerYAnchor.constraint(equalTo: createNewGroup.centerYAnchor).isActive = true
+        backButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:15).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         
         view.addSubview(groupNameTextView)
         groupNameTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant:25).isActive = true
