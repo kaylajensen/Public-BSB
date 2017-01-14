@@ -85,9 +85,9 @@
 			children = (
 				32A3BC501E296ED300F556BC /* Constants.swift */,
 				323B5E911DC7F86200674363 /* AppDelegate.swift */,
+				32B88B4B1E21608D004BE1C0 /* Groups */,
 				32A3BC541E297C6500F556BC /* Create Group */,
 				32F5B3001E21619300D5C157 /* Profiles */,
-				32B88B4B1E21608D004BE1C0 /* Groups */,
 				32A3BC551E297C8B00F556BC /* Epic Bets */,
 				32B88B4A1E216059004BE1C0 /* Supporting Files */,
 				32B88B491E21603B004BE1C0 /* Libraries */,

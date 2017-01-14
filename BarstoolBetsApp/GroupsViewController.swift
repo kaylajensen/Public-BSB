@@ -34,36 +34,31 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         return UIDevice.current.orientation
     }
     
-    lazy var createNewGroup : UIButton = {
+    lazy var newGroupTabButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("+", for: .normal)
-        let font = UIFont(name: "HelveticaNeue-UltraLight", size: 30.0)!
-        //let color = UIColor(netHex: 0xF56D6A)
-        let color = UIColor.white
-        button.setTitleColor(color, for: .normal)
-        button.titleLabel!.font = font
+        button.setImage(UIImage(named: "create_group_icon"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
         button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
-    var numNotificationsLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "7"
-        let font = UIFont(name: "HelveticaNeue-Light", size: 15.0)!
-        label.textAlignment = .center
-        label.textColor = UIColor.white
-        label.font = font
-        return label
+    lazy var groupsTabButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "groups_icon"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
+        return button
     }()
     
-    var wheelImageView : UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "wheel")
-        image.isUserInteractionEnabled = true
-        return image
+    lazy var epicTabButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "epic_icon"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
+        return button
     }()
     
     var notificationView : UIView = {
@@ -72,45 +67,12 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.clipsToBounds = false
         view.layer.masksToBounds = false
         view.layer.cornerRadius = 6
-        view.backgroundColor = UIColor.init(netHex: 0xF8926D)
+        view.backgroundColor = BSB_RED
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = 0.8
         view.layer.shadowOffset = CGSize.zero
         view.layer.shadowRadius = 4
         return view
-    }()
-    
-    var createGroupContainerView : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = false
-        view.layer.masksToBounds = false
-        view.layer.cornerRadius = 17
-        view.backgroundColor = UIColor.init(netHex: 0xF56D6A)
-        view.layer.shadowColor = UIColor.lightGray.cgColor
-        view.layer.shadowOpacity = 0.4
-        view.layer.shadowOffset = CGSize.zero
-        view.layer.shadowRadius = 1
-        return view
-    }()
-    
-    lazy var epicButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("EPIC", for: .normal)
-        button.setTitleColor(UIColor.init(netHex: 0xFBC171), for: .normal)
-        button.addTarget(self, action: #selector(epicBetsPressed(sender:)), for: .touchUpInside)
-        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 19)
-        return button
-    }()
-    
-    lazy var groupsButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Groups", for: .normal)
-        button.setTitleColor(UIColor.init(netHex: 0xFAA86F), for: .normal)
-        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 19)
-        return button
     }()
     
     lazy var profileButton : UIButton = {
@@ -143,7 +105,9 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         setupCollectionView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(GroupsViewController.rotationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        setupWheelMenu()
+        
+        setupTabIcons()
+        //setupWheelMenu()
     }
 }
 
@@ -168,6 +132,7 @@ extension GroupsViewController {
         if sender.state == .ended {
             spinAnimation.fromValue = currentRotation
             let rotationAmount = M_PI*2/6
+            let wheelImageView = UIImageView(image: UIImage(named: "wheel"))
             if sender.velocity(in: wheelImageView).x > 0 {
                 // went right
                 currentRotation = currentRotation + rotationAmount
@@ -200,7 +165,7 @@ extension GroupsViewController {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.identifier, for: indexPath) as! CarouselCollectionViewCell
-        cell.groupImage.image = UIImage(named: "barstool")
+        cell.groupImage.image = UIImage(named: "gradient_barstool")
         cell.groupName.text = groupNames[indexPath.row]
         return cell
     }
@@ -247,6 +212,54 @@ extension GroupsViewController {
         self.tabBarController?.selectedIndex = 0
     }
     
+    func setupTabIcons() {
+        let iconsHeightWidth : CGFloat = 75
+        
+        view.addSubview(newGroupTabButton)
+        newGroupTabButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        newGroupTabButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-15).isActive = true
+        newGroupTabButton.heightAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        newGroupTabButton.widthAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        
+        view.addSubview(groupsTabButton)
+        groupsTabButton.rightAnchor.constraint(equalTo: newGroupTabButton.leftAnchor,constant:-40).isActive = true
+        groupsTabButton.bottomAnchor.constraint(equalTo: newGroupTabButton.centerYAnchor).isActive = true
+        groupsTabButton.heightAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        groupsTabButton.widthAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        
+        let groupsLabel = UILabel()
+        groupsLabel.text = "Groups"
+        groupsLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 10)
+        groupsLabel.textColor = BSB_RED
+        groupsLabel.textAlignment = .center
+
+        view.addSubview(groupsLabel)
+        groupsLabel.translatesAutoresizingMaskIntoConstraints = false
+        groupsLabel.centerXAnchor.constraint(equalTo: groupsTabButton.centerXAnchor).isActive = true
+        groupsLabel.topAnchor.constraint(equalTo: groupsTabButton.bottomAnchor,constant:-15).isActive = true
+        groupsLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
+        groupsLabel.widthAnchor.constraint(equalTo: groupsTabButton.widthAnchor).isActive = true
+        
+        view.addSubview(epicTabButton)
+        epicTabButton.leftAnchor.constraint(equalTo: newGroupTabButton.rightAnchor,constant:40).isActive = true
+        epicTabButton.bottomAnchor.constraint(equalTo: newGroupTabButton.centerYAnchor).isActive = true
+        epicTabButton.heightAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        epicTabButton.widthAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        
+        let epicLabel = UILabel()
+        epicLabel.text = "Epic"
+        epicLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 10)
+        epicLabel.textColor = BSB_YELLOW
+        epicLabel.textAlignment = .center
+        
+        view.addSubview(epicLabel)
+        epicLabel.translatesAutoresizingMaskIntoConstraints = false
+        epicLabel.centerXAnchor.constraint(equalTo: epicTabButton.centerXAnchor).isActive = true
+        epicLabel.topAnchor.constraint(equalTo: epicTabButton.bottomAnchor,constant:-15).isActive = true
+        epicLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
+        epicLabel.widthAnchor.constraint(equalTo: epicTabButton.widthAnchor).isActive = true
+    }
+    
     func setupCollectionView() {
         view.backgroundColor = UIColor.white
         
@@ -268,7 +281,7 @@ extension GroupsViewController {
         collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant:-40).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant:-20).isActive = true
         
         self.setupLayout()
         self.currentPage = 0
@@ -289,53 +302,6 @@ extension GroupsViewController {
             let scrollPosition: UICollectionViewScrollPosition = UIDeviceOrientationIsPortrait(orientation) ? .centeredHorizontally : .centeredVertically
             self.collectionView.scrollToItem(at: indexPath, at: scrollPosition, animated: false)
         }
-    }
-    
-    func setupWheelMenu() {
-        view.addSubview(wheelImageView)
-        wheelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        let approxWidth = view.frame.width
-        wheelImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: approxWidth/1.55).isActive = true
-        wheelImageView.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        wheelImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(didRotateWheel(sender:)))
-        wheelImageView.addGestureRecognizer(panGesture)
-        
-        view.addSubview(createGroupContainerView)
-        createGroupContainerView.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-25).isActive = true
-        createGroupContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-20).isActive = true
-        createGroupContainerView.heightAnchor.constraint(equalToConstant: 34).isActive = true
-        createGroupContainerView.widthAnchor.constraint(equalToConstant: 34).isActive = true
-        
-        createGroupContainerView.addSubview(createNewGroup)
-        createNewGroup.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        createNewGroup.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        createNewGroup.centerYAnchor.constraint(equalTo: createGroupContainerView.centerYAnchor,constant:-3).isActive = true
-        createNewGroup.centerXAnchor.constraint(equalTo: createGroupContainerView.centerXAnchor).isActive = true
-        
-        view.addSubview(groupsButton)
-        groupsButton.topAnchor.constraint(equalTo: wheelImageView.topAnchor,constant:5).isActive = true
-        groupsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        groupsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        groupsButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        view.addSubview(epicButton)
-        epicButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:25).isActive = true
-        epicButton.bottomAnchor.constraint(equalTo: createGroupContainerView.bottomAnchor).isActive = true
-        epicButton.heightAnchor.constraint(equalTo: createGroupContainerView.heightAnchor).isActive = true
-        epicButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        view.addSubview(profileButton)
-        profileButton.topAnchor.constraint(equalTo: view.topAnchor,constant:27).isActive = true
-        profileButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:27).isActive = true
-        profileButton.sizeToFit()
-        
-        view.addSubview(notificationView)
-        notificationView.heightAnchor.constraint(equalToConstant: 12).isActive = true
-        notificationView.widthAnchor.constraint(equalToConstant: 12).isActive = true
-        notificationView.bottomAnchor.constraint(equalTo: profileButton.topAnchor,constant:12).isActive = true
-        notificationView.leftAnchor.constraint(equalTo: profileButton.rightAnchor,constant:-3).isActive = true
     }
 }
 
@@ -365,16 +331,3 @@ extension UIImage {
         return image
     }
 }
-
-extension String {
-    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        
-        return boundingBox.height
-    }
-}
-
-
-
-
