@@ -89,11 +89,12 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isHidden = true
         
+        setupBasicView()
+        
         createNewGroup.isEnabled = false
         groupNameTextView.delegate = self
         groupNameTextView.addTarget(self, action: #selector(checkIfGroupNameEntered), for: .editingChanged)
-        
-        setupBasicView()
+        groupNameTextView.becomeFirstResponder()
     }
     
     func checkIfGroupNameEntered() {

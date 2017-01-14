@@ -46,6 +46,10 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "groups_icon"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOpacity = 0.8
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowRadius = 6
         return button
     }()
     
@@ -264,7 +268,7 @@ extension GroupsViewController {
         
         let groupsLabel = UILabel()
         groupsLabel.text = "Groups"
-        groupsLabel.font = UIFont(name: "HelveticaNeue-Light", size: 10)
+        groupsLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 10)
         groupsLabel.textColor = BSB_RED
         groupsLabel.textAlignment = .center
 
@@ -301,8 +305,9 @@ extension GroupsViewController {
         collectionViewLayout = UPCarouselFlowLayout()
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        collectionViewLayout.itemSize = CGSize(width: view.frame.width, height: 250)
-        collectionViewLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 50)
+        collectionViewLayout.itemSize = CGSize(width: view.frame.width/1.7, height: 250)
+        collectionViewLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 75)
+        collectionViewLayout.sideItemAlpha = 0.18
         
         let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 260)
         collectionView = UICollectionView(frame: frame, collectionViewLayout: collectionViewLayout)

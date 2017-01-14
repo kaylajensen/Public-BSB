@@ -15,6 +15,14 @@ class FriendsCollectionViewController: UIViewController, UICollectionViewDataSou
     var collectionView: UICollectionView!
     var filterArray : [String] = [String]()
     
+    lazy var backButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "back_button"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
     var titleLabel : UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
@@ -68,12 +76,24 @@ class FriendsCollectionViewController: UIViewController, UICollectionViewDataSou
         searchBar.becomeFirstResponder()
     }
     
+    func backButtonPressed(sender : AnyObject) {
+        print("backbutton pressed")
+        searchBar.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func setupTopView() {
         view.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 54).isActive = true
+        
+        view.addSubview(backButton)
+        backButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        backButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:15).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         
         view.addSubview(gradientSeparator)
         gradientSeparator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

@@ -39,8 +39,8 @@ class CarouselCollectionViewCell: UICollectionViewCell {
         
         groupImage.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         groupImage.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        groupImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7).isActive = true
-        groupImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
+        groupImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8).isActive = true
+        groupImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.55).isActive = true
         
         groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor).isActive = true
         groupName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
