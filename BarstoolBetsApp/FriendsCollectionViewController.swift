@@ -172,6 +172,20 @@ extension FriendsCollectionViewController {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("\(names[indexPath.row]) selected")
+        
+        let friendViewController = FriendProfileViewController()
+        
+        if filterArray.count != 0 {
+            friendViewController.friendFirstLastName = filterArray[indexPath.row]
+            let firstName = filterArray[indexPath.row].components(separatedBy: " ")
+            friendViewController.friendFirstName = firstName[0]
+        } else {
+            friendViewController.friendFirstLastName = names[indexPath.row]
+            let firstName = names[indexPath.row].components(separatedBy: " ")
+            friendViewController.friendFirstName = firstName[0]
+        }
+
+        self.present(friendViewController, animated: true, completion: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
