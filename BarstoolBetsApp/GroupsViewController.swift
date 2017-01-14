@@ -10,6 +10,8 @@ import UIKit
 
 class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
 
+    var createGroupViewController = CreateGroupViewController()
+    var myProfileViewController = MyProfileViewController()
     var collectionView : UICollectionView!
     var collectionViewLayout : UPCarouselFlowLayout!
     fileprivate var currentPage : Int = 0
@@ -44,7 +46,6 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "groups_icon"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-        button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -53,7 +54,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "epic_icon"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-        button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(epicBetsPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -62,26 +63,44 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = false
         view.layer.masksToBounds = false
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = 19/2
         view.backgroundColor = BSB_RED
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = 0.8
-        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
         view.layer.shadowRadius = 4
         return view
     }()
     
-    lazy var profileButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Jessica Jones", for: .normal)
-        //button.setTitleColor(UIColor.init(netHex: 0xF56D6A), for: .normal)
-        button.setTitleColor(UIColor.init(netHex: 0xB1B1B1), for: .normal)
-        button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 19)
-        button.titleLabel!.textAlignment = .left
-        button.contentHorizontalAlignment = .left
-        button.addTarget(self, action: #selector(myProfilePressed(sender:)), for: .touchUpInside)
-        return button
+    lazy var profileViewContainer : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.layer.cornerRadius = 77/2
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        view.layer.shadowOpacity = 0.8
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.shadowRadius = 4
+        view.layer.masksToBounds = false
+        view.clipsToBounds = false
+        return view
+    }()
+    
+    lazy var profileImageView : UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "profileexample")
+        image.contentMode = .scaleAspectFill
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.layer.shadowColor = UIColor.lightGray.cgColor
+        image.layer.shadowOpacity = 0.8
+        image.layer.shadowOffset = CGSize(width: 3, height: 3)
+        image.layer.shadowRadius = 4
+        image.layer.masksToBounds = false
+        image.clipsToBounds = false
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(myProfilePressed(sender:)))
+        image.addGestureRecognizer(gesture)
+        image.isUserInteractionEnabled = true
+        return image
     }()
     
     override func viewDidLoad() {
@@ -103,7 +122,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         setupCollectionView()
         
         setupTabIcons()
-        //setupWheelMenu()
+        setupProfileTabView()
     }
 }
 
@@ -111,19 +130,15 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
 extension GroupsViewController {
     
     func epicBetsPressed(sender : AnyObject) {
-        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.selectedIndex = 1
     }
     
     func myProfilePressed(sender : AnyObject) {
-        let vc = MyProfileViewController()
-        vc.modalPresentationStyle = .overCurrentContext
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.present(myProfileViewController, animated: true, completion: nil)
     }
     
     func createGroupButtonPressed(sender : AnyObject) {
-        
-        let createGroupViewController = CreateGroupViewController()
-        self.navigationController?.pushViewController(createGroupViewController, animated: true)
+        self.navigationController?.present(createGroupViewController, animated: true,completion: nil)
     }
     
     func didRotateWheel(sender : UIPanGestureRecognizer) {
@@ -188,6 +203,28 @@ extension GroupsViewController {
 // MARK: - Setup Functions
 extension GroupsViewController {
     
+    func setupProfileTabView() {
+        view.addSubview(profileViewContainer)
+        profileViewContainer.topAnchor.constraint(equalTo: view.topAnchor,constant:20).isActive = true
+        profileViewContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        profileViewContainer.heightAnchor.constraint(equalToConstant: 77).isActive = true
+        profileViewContainer.widthAnchor.constraint(equalToConstant: 77).isActive = true
+        
+        profileViewContainer.isHidden = true
+        
+        view.addSubview(profileImageView)
+        profileImageView.centerXAnchor.constraint(equalTo: profileViewContainer.centerXAnchor).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: profileViewContainer.centerYAnchor).isActive = true
+        profileImageView.heightAnchor.constraint(equalTo: profileViewContainer.heightAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalTo: profileViewContainer.widthAnchor).isActive = true
+        
+        view.addSubview(notificationView)
+        notificationView.topAnchor.constraint(equalTo: profileViewContainer.topAnchor).isActive = true
+        notificationView.rightAnchor.constraint(equalTo: profileViewContainer.rightAnchor).isActive = true
+        notificationView.heightAnchor.constraint(equalToConstant: 19).isActive = true
+        notificationView.widthAnchor.constraint(equalToConstant: 19).isActive = true
+    }
+    
     func setupSwipeControl() {
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(recognizer:)))
@@ -227,7 +264,7 @@ extension GroupsViewController {
         
         let groupsLabel = UILabel()
         groupsLabel.text = "Groups"
-        groupsLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 10)
+        groupsLabel.font = UIFont(name: "HelveticaNeue-Light", size: 10)
         groupsLabel.textColor = BSB_RED
         groupsLabel.textAlignment = .center
 

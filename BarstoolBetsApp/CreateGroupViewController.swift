@@ -117,7 +117,7 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
     
     func backButtonPressed(sender : AnyObject) {
         print("backbutton pressed")
-        _ = self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func createGroupPressed(sender : AnyObject) {
