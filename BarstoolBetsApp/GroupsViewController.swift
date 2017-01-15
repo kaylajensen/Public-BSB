@@ -191,7 +191,7 @@ extension GroupsViewController {
         
         let groupViewController = GroupViewController()
         groupViewController.groupName = group
-        self.navigationController?.pushViewController(groupViewController, animated: true)
+        self.present(groupViewController, animated: true, completion: nil)
         
 //        let alert = UIAlertController(title: group, message: nil, preferredStyle: .alert)
 //        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

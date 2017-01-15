@@ -10,9 +10,9 @@ import UIKit
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var collectionView : UICollectionView!
     var chatTableView : UITableView!
     var reuseIdentifier = "chatCell"
-    var collectionView : UICollectionView!
     var groupName = ""
     
     var groupTitleLabel : UILabel = {
@@ -29,7 +29,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "back_button"), for: .normal)
-        //button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -37,6 +37,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "large_ellipsis"), for: .normal)
+        button.addTarget(self, action: #selector(showMoreChatMessagesPressed(sender:)), for: .touchUpInside)
         return button
     }()
 
@@ -60,6 +61,12 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         groupTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         groupTitleLabel.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier:0.6).isActive = true
         groupTitleLabel.heightAnchor.constraint(equalToConstant:27).isActive = true
+        
+        view.addSubview(backButton)
+        backButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant:15).isActive = true
+        backButton.centerYAnchor.constraint(equalTo: groupTitleLabel.centerYAnchor).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func setupCollectionView() {
@@ -111,8 +118,19 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         showMoreChatMessagesButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         showMoreChatMessagesButton.heightAnchor.constraint(equalToConstant: 10).isActive = true
     }
+    
+    func backButtonPressed(sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showMoreChatMessagesPressed(sender: AnyObject) {
+        let moreChatViewController = ChatViewController()
+        moreChatViewController.groupName = groupTitleLabel.text!
+        self.present(moreChatViewController, animated: true, completion: nil)
+    }
 }
 
+// MARK : Chat Table View DataSource and Delegate
 extension GroupViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ChatTableViewCell
