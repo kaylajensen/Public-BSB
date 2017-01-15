@@ -13,6 +13,7 @@
 		322F7B6F1E2AFBAC009092A8 /* SnapContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F7B6D1E2AFBAC009092A8 /* SnapContainerViewController.swift */; };
 		322F7B701E2AFBAC009092A8 /* VerticalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F7B6E1E2AFBAC009092A8 /* VerticalScrollViewController.swift */; };
 		322F7B721E2B1D55009092A8 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F7B711E2B1D55009092A8 /* LeftViewController.swift */; };
+		322F7B751E2B21F1009092A8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F7B741E2B21F1009092A8 /* GroupViewController.swift */; };
 		323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E911DC7F86200674363 /* AppDelegate.swift */; };
 		323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E931DC7F86200674363 /* GroupsViewController.swift */; };
 		323B5E991DC7F86200674363 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E981DC7F86200674363 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		322F7B6D1E2AFBAC009092A8 /* SnapContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapContainerViewController.swift; sourceTree = "<group>"; };
 		322F7B6E1E2AFBAC009092A8 /* VerticalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalScrollViewController.swift; sourceTree = "<group>"; };
 		322F7B711E2B1D55009092A8 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		322F7B741E2B21F1009092A8 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		323B5E8E1DC7F86200674363 /* BarstoolBetsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarstoolBetsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		323B5E911DC7F86200674363 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		323B5E931DC7F86200674363 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		322F7B731E2B21DB009092A8 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				322F7B741E2B21F1009092A8 /* GroupViewController.swift */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
 		323B5E851DC7F86200674363 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +104,7 @@
 				32A3BC501E296ED300F556BC /* Constants.swift */,
 				323B5E911DC7F86200674363 /* AppDelegate.swift */,
 				322F7B711E2B1D55009092A8 /* LeftViewController.swift */,
+				322F7B731E2B21DB009092A8 /* Group */,
 				32B88B4B1E21608D004BE1C0 /* Groups */,
 				32A3BC541E297C6500F556BC /* Create Group */,
 				32F5B3001E21619300D5C157 /* Profiles */,
@@ -312,6 +323,7 @@
 				32A3BC571E2AD0AF00F556BC /* FriendProfileViewController.swift in Sources */,
 				32B88B461E1FDAB7004BE1C0 /* MyProfileViewController.swift in Sources */,
 				323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */,
+				322F7B751E2B21F1009092A8 /* GroupViewController.swift in Sources */,
 				32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */,
 				322F7B701E2AFBAC009092A8 /* VerticalScrollViewController.swift in Sources */,
 				32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */,
@@ -357,6 +369,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -407,6 +420,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

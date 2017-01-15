@@ -187,10 +187,15 @@ extension GroupsViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let group = groupNames[(indexPath as NSIndexPath).row]
-        let alert = UIAlertController(title: group, message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        let group = groupNames[indexPath.row]
+        
+        let groupViewController = GroupViewController()
+        groupViewController.groupName = group
+        self.navigationController?.pushViewController(groupViewController, animated: true)
+        
+//        let alert = UIAlertController(title: group, message: nil, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//        present(alert, animated: true, completion: nil)
     }
     
     
