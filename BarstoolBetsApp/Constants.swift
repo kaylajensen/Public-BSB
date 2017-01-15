@@ -13,4 +13,5 @@ import UIKit
 
 var BSB_RED = UIColor.init(netHex: 0xF45B69)
 var BSB_YELLOW = UIColor.init(netHex: 0xFDD750)
+var BSB_LIGHT_YELLOW = UIColor.init(netHex: 0xFDE273)
 var BSB_ORANGE = UIColor.init(netHex: 0xFBAE17)

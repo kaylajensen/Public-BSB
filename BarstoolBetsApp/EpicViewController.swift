@@ -19,13 +19,11 @@ class EpicViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = BSB_ORANGE
+        view.backgroundColor = BSB_LIGHT_YELLOW
         self.navigationController?.navigationBar.isHidden = true
         
+        setupWatchEpicBetsView()
         setupEpicView()
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(playEpicBets))
-        view.addGestureRecognizer(gesture)
     }
     
     func playEpicBets() {
@@ -50,6 +48,72 @@ class EpicViewController: UIViewController, UIGestureRecognizerDelegate {
 
 // MARK : Setup
 extension EpicViewController {
+    
+    func setupWatchEpicBetsView() {
+        let watchLabel = UILabel()
+        watchLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 30)
+        watchLabel.textColor = UIColor.black
+        watchLabel.text = "Watch"
+        watchLabel.textAlignment = .center
+        watchLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let betsLabel = UILabel()
+        betsLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 30)
+        betsLabel.textColor = UIColor.black
+        betsLabel.text = "Bets"
+        betsLabel.textAlignment = .center
+        betsLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let epicLabel = UIImageView()
+        epicLabel.image = UIImage(named: "epic_large_icon")
+        epicLabel.translatesAutoresizingMaskIntoConstraints = false
+        epicLabel.contentMode = .scaleAspectFit
+        
+        let playButton = UIImageView()
+        playButton.image = UIImage(named: "play_button")
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.contentMode = .scaleAspectFit
+        
+        //190w by 170h
+        let container = UIView()
+        container.backgroundColor = UIColor.clear
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.isUserInteractionEnabled = true
+        
+        view.addSubview(container)
+        container.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        container.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        container.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        container.widthAnchor.constraint(equalToConstant: 220).isActive = true
+        
+        container.addSubview(watchLabel)
+        watchLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        watchLabel.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+        watchLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        watchLabel.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
+        
+        container.addSubview(epicLabel)
+        epicLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        epicLabel.topAnchor.constraint(equalTo: watchLabel.bottomAnchor,constant:4).isActive = true
+        epicLabel.heightAnchor.constraint(equalToConstant: 85).isActive = true
+        epicLabel.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
+        
+        container.addSubview(betsLabel)
+        betsLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        betsLabel.topAnchor.constraint(equalTo: epicLabel.bottomAnchor).isActive = true
+        betsLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        betsLabel.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
+        
+        container.addSubview(playButton)
+        playButton.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        playButton.topAnchor.constraint(equalTo: betsLabel.bottomAnchor,constant:4).isActive = true
+        playButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        playButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(playEpicBets))
+        container.addGestureRecognizer(gesture)
+        
+    }
 
     func setupEpicView() {
         let opagueOverlay = UIView()
