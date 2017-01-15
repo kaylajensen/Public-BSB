@@ -83,8 +83,6 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupSwipeControl()
 
         view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isHidden = true
@@ -108,14 +106,6 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
         }
     }
     
-    func swipeRight(recognizer: UISwipeGestureRecognizer) {
-        self.tabBarController?.selectedIndex = 2
-    }
-    
-    func swipeLeft(recognizer: UISwipeGestureRecognizer) {
-        self.tabBarController?.selectedIndex = 1
-    }
-    
     func backButtonPressed(sender : AnyObject) {
         print("backbutton pressed")
         self.dismiss(animated: true, completion: nil)
@@ -133,17 +123,6 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
 
 // MARK : Setup
 extension CreateGroupViewController {
-    func setupSwipeControl() {
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(recognizer:)))
-        swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
-        swipeLeft.delegate = self
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(recognizer:)))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
-        swipeRight.delegate = self
-    }
     
     func setupBasicView() {
         view.addSubview(titleLabel)

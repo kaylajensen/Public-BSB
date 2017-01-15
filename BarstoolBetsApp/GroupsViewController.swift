@@ -111,8 +111,6 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         self.automaticallyAdjustsScrollViewInsets = false
-        
-        //setupSwipeControl()
 
         view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(color: UIColor.clear), for: .default)
@@ -229,28 +227,6 @@ extension GroupsViewController {
         notificationView.widthAnchor.constraint(equalToConstant: 19).isActive = true
     }
     
-    func setupSwipeControl() {
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(recognizer:)))
-        swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
-        swipeLeft.delegate = self
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(recognizer:)))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
-        swipeRight.delegate = self
-        
-    }
-    
-    func swipeRight(recognizer: UISwipeGestureRecognizer) {
-        self.tabBarController?.selectedIndex = 1
-    }
-    
-    func swipeLeft(recognizer: UISwipeGestureRecognizer) {
-        self.tabBarController?.selectedIndex = 0
-    }
-    
     func setupTabIcons() {
         let iconsHeightWidth : CGFloat = 75
         
@@ -323,8 +299,6 @@ extension GroupsViewController {
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        self.currentPage = 0
     }
 }
 

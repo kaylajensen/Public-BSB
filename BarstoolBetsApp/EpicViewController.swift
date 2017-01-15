@@ -23,7 +23,6 @@ class EpicViewController: UIViewController, UIGestureRecognizerDelegate {
         self.navigationController?.navigationBar.isHidden = true
         
         setupEpicView()
-        setupSwipeControl()
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(playEpicBets))
         view.addGestureRecognizer(gesture)
@@ -47,32 +46,10 @@ class EpicViewController: UIViewController, UIGestureRecognizerDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
-
-    func swipeRight(recognizer: UISwipeGestureRecognizer) {
-        self.tabBarController?.selectedIndex = 1
-    }
-    
-    func swipeLeft(recognizer: UISwipeGestureRecognizer) {
-        self.tabBarController?.selectedIndex = 0
-    }
 }
 
 // MARK : Setup
 extension EpicViewController {
-    
-    func setupSwipeControl() {
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(recognizer:)))
-        swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
-        swipeLeft.delegate = self
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(recognizer:)))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
-        swipeRight.delegate = self
-        
-    }
 
     func setupEpicView() {
         let opagueOverlay = UIView()
