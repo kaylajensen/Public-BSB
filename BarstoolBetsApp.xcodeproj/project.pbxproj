@@ -12,6 +12,7 @@
 		320F45251E23DC3D00B2469F /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F45241E23DC3D00B2469F /* FriendCollectionViewCell.swift */; };
 		322F7B6F1E2AFBAC009092A8 /* SnapContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F7B6D1E2AFBAC009092A8 /* SnapContainerViewController.swift */; };
 		322F7B701E2AFBAC009092A8 /* VerticalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F7B6E1E2AFBAC009092A8 /* VerticalScrollViewController.swift */; };
+		322F7B721E2B1D55009092A8 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F7B711E2B1D55009092A8 /* LeftViewController.swift */; };
 		323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E911DC7F86200674363 /* AppDelegate.swift */; };
 		323B5E941DC7F86200674363 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323B5E931DC7F86200674363 /* GroupsViewController.swift */; };
 		323B5E991DC7F86200674363 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E981DC7F86200674363 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		320F45241E23DC3D00B2469F /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		322F7B6D1E2AFBAC009092A8 /* SnapContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapContainerViewController.swift; sourceTree = "<group>"; };
 		322F7B6E1E2AFBAC009092A8 /* VerticalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalScrollViewController.swift; sourceTree = "<group>"; };
+		322F7B711E2B1D55009092A8 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		323B5E8E1DC7F86200674363 /* BarstoolBetsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarstoolBetsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		323B5E911DC7F86200674363 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		323B5E931DC7F86200674363 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				32A3BC501E296ED300F556BC /* Constants.swift */,
 				323B5E911DC7F86200674363 /* AppDelegate.swift */,
+				322F7B711E2B1D55009092A8 /* LeftViewController.swift */,
 				32B88B4B1E21608D004BE1C0 /* Groups */,
 				32A3BC541E297C6500F556BC /* Create Group */,
 				32F5B3001E21619300D5C157 /* Profiles */,
@@ -316,6 +319,7 @@
 				32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */,
 				32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */,
 				323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */,
+				322F7B721E2B1D55009092A8 /* LeftViewController.swift in Sources */,
 				320F45231E23DB8000B2469F /* FriendsCollectionViewController.swift in Sources */,
 				320F45211E23D74D00B2469F /* UIImageView+FaceAware.swift in Sources */,
 			);

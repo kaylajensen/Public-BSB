@@ -136,7 +136,8 @@ extension GroupsViewController {
     }
     
     func myProfilePressed(sender : AnyObject) {
-        self.navigationController?.present(myProfileViewController, animated: true, completion: nil)
+        //self.navigationController?.present(myProfileViewController, animated: true, completion: nil)
+        
     }
     
     func createGroupButtonPressed(sender : AnyObject) {
@@ -225,6 +226,21 @@ extension GroupsViewController {
         notificationView.rightAnchor.constraint(equalTo: profileViewContainer.rightAnchor).isActive = true
         notificationView.heightAnchor.constraint(equalToConstant: 19).isActive = true
         notificationView.widthAnchor.constraint(equalToConstant: 19).isActive = true
+        
+        let swipeDown = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let origImage = UIImage(named: "swipe_down_arrow")
+        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+        swipeDown.setImage(tintedImage, for: .normal)
+        swipeDown.tintColor = UIColor.black.withAlphaComponent(0.1)
+        swipeDown.contentMode = .scaleAspectFit
+        swipeDown.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(swipeDown)
+        swipeDown.centerXAnchor.constraint(equalTo: profileViewContainer.centerXAnchor).isActive = true
+        swipeDown.topAnchor.constraint(equalTo: profileViewContainer.bottomAnchor).isActive = true
+        swipeDown.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        swipeDown.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
     }
     
     func setupTabIcons() {
@@ -255,6 +271,20 @@ extension GroupsViewController {
         groupsLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
         groupsLabel.widthAnchor.constraint(equalTo: groupsTabButton.widthAnchor).isActive = true
         
+        let swipeRight = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let origImage = UIImage(named: "swipe_left_arrow")
+        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+        swipeRight.setImage(tintedImage, for: .normal)
+        swipeRight.tintColor = UIColor.black.withAlphaComponent(0.1)
+        swipeRight.contentMode = .scaleAspectFit
+        swipeRight.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(swipeRight)
+        swipeRight.centerYAnchor.constraint(equalTo: groupsTabButton.centerYAnchor).isActive = true
+        swipeRight.rightAnchor.constraint(equalTo: groupsTabButton.leftAnchor).isActive = true
+        swipeRight.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        swipeRight.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         view.addSubview(epicTabButton)
         epicTabButton.leftAnchor.constraint(equalTo: newGroupTabButton.rightAnchor,constant:40).isActive = true
         epicTabButton.bottomAnchor.constraint(equalTo: newGroupTabButton.centerYAnchor).isActive = true
@@ -273,6 +303,20 @@ extension GroupsViewController {
         epicLabel.topAnchor.constraint(equalTo: epicTabButton.bottomAnchor,constant:-15).isActive = true
         epicLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
         epicLabel.widthAnchor.constraint(equalTo: epicTabButton.widthAnchor).isActive = true
+        
+        let swipeLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let origImage1 = UIImage(named: "swipe_right_arrow")
+        let tintedImage1 = origImage1?.withRenderingMode(.alwaysTemplate)
+        swipeLeft.setImage(tintedImage1, for: .normal)
+        swipeLeft.tintColor = UIColor.black.withAlphaComponent(0.1)
+        swipeLeft.contentMode = .scaleAspectFit
+        swipeLeft.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(swipeLeft)
+        swipeLeft.centerYAnchor.constraint(equalTo: epicTabButton.centerYAnchor).isActive = true
+        swipeLeft.leftAnchor.constraint(equalTo: epicTabButton.rightAnchor).isActive = true
+        swipeLeft.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        swipeLeft.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func setupCollectionView() {

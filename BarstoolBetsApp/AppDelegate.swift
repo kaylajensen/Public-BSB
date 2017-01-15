@@ -30,16 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profileVC = MyProfileViewController()
         nav3.viewControllers = [profileVC]
         
-//        let tabs = UITabBarController()
-//        tabs.tabBar.isHidden = true
-//        tabs.viewControllers = [nav2,nav1]
-//        tabs.hidesBottomBarWhenPushed = true
-//        window?.rootViewController = tabs
-        
         let middle = nav2
         let right = nav1
         let top = nav3
-        let left = FriendProfileViewController()
+        let left = LeftViewController()
         
         let snapContainer = SnapContainerViewController.containerViewWith(left,
                                                                           middleVC: middle,

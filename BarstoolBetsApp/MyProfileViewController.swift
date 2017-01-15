@@ -48,17 +48,6 @@ class MyProfileViewController: UIViewController {
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 20)
         return button
     }()
-    
-    lazy var exitButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let origImage = UIImage(named: "delete");
-        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        button.setImage(tintedImage, for: .normal)
-        button.tintColor = UIColor.white
-        button.addTarget(self, action: #selector(exitButtonPressed(sender:)), for: .touchUpInside)
-        return button
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +55,6 @@ class MyProfileViewController: UIViewController {
         setupBackground()
         setupProfileImage()
         setupProfileButtons()
-    }
-    
-    func exitButtonPressed(sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     func setupBackground() {
@@ -147,9 +132,17 @@ class MyProfileViewController: UIViewController {
         settingsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         settingsButton.topAnchor.constraint(equalTo: friendsButton.bottomAnchor,constant:10).isActive = true
         
-        view.addSubview(exitButton)
-        exitButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant:-10).isActive = true
-        exitButton.topAnchor.constraint(equalTo: view.topAnchor,constant:10).isActive = true
+        let swipeDown = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let origImage = UIImage(named: "swipe_up_arrow")
+        swipeDown.setImage(origImage, for: .normal)
+        swipeDown.contentMode = .scaleAspectFit
+        swipeDown.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(swipeDown)
+        swipeDown.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        swipeDown.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-5).isActive = true
+        swipeDown.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        swipeDown.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
 }
 
