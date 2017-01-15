@@ -75,6 +75,11 @@ class MyProfileViewController: UIViewController {
     func setupBackground() {
         view.backgroundColor = UIColor.clear
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(color: UIColor.clear), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
         let profileImage = UIImage(named: "profileexample")
         let uiImageView = UIImageView(image: profileImage)
         uiImageView.frame = view.frame

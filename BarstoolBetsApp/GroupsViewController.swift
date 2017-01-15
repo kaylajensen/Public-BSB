@@ -112,7 +112,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        setupSwipeControl()
+        //setupSwipeControl()
 
         view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(color: UIColor.clear), for: .default)

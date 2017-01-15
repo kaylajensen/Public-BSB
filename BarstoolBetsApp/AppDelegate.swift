@@ -26,13 +26,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let groupVC = GroupsViewController()
         nav2.viewControllers = [groupVC]
         
-        let tabs = UITabBarController()
-        tabs.tabBar.isHidden = true
-        tabs.viewControllers = [nav2,nav1]
-        tabs.hidesBottomBarWhenPushed = true
-
-        window?.rootViewController = tabs
+        let nav3 = UINavigationController()
+        let profileVC = MyProfileViewController()
+        nav3.viewControllers = [profileVC]
         
+//        let tabs = UITabBarController()
+//        tabs.tabBar.isHidden = true
+//        tabs.viewControllers = [nav2,nav1]
+//        tabs.hidesBottomBarWhenPushed = true
+//        window?.rootViewController = tabs
+        
+        let middle = nav2
+        let right = nav1
+        let top = nav3
+        let left = FriendProfileViewController()
+        
+        let snapContainer = SnapContainerViewController.containerViewWith(left,
+                                                                          middleVC: middle,
+                                                                          rightVC: right,
+                                                                          topVC: top,
+                                                                          bottomVC: nil)
+        
+        self.window?.rootViewController = snapContainer
         window?.makeKeyAndVisible()
 
         application.isStatusBarHidden = true
