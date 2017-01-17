@@ -87,6 +87,10 @@ class LeftViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(color: UIColor.clear), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
         setupView()
     }

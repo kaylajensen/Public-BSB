@@ -13,32 +13,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let nav1 = UINavigationController()
+        nav1 = UINavigationController()
         let epicVC = EpicViewController()
         nav1.viewControllers = [epicVC]
         
-        let nav2 = UINavigationController()
+        nav2 = UINavigationController()
         let groupVC = GroupsViewController()
         nav2.viewControllers = [groupVC]
         
-        let nav3 = UINavigationController()
+        nav3 = UINavigationController()
         let profileVC = MyProfileViewController()
         nav3.viewControllers = [profileVC]
+        
+        nav4 = UINavigationController()
+        let quickLinksVC = LeftViewController()
+        nav4?.viewControllers = [quickLinksVC]
         
         let middle = nav2
         let right = nav1
         let top = nav3
-        let left = LeftViewController()
+        let left = nav4
         
-        let snapContainer = SnapContainerViewController.containerViewWith(left,
-                                                                          middleVC: middle,
-                                                                          rightVC: right,
-                                                                          topVC: top,
+        let snapContainer = SnapContainerViewController.containerViewWith(left!,
+                                                                          middleVC: middle!,
+                                                                          rightVC: right!,
+                                                                          topVC: top!,
                                                                           bottomVC: nil)
         
         self.window?.rootViewController = snapContainer

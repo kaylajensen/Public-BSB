@@ -113,6 +113,10 @@ class CreateGroupViewController: UIViewController, UIGestureRecognizerDelegate, 
     
     func createGroupPressed(sender : AnyObject) {
         print("create group button pressed")
+        
+        let group = groupNameTextView.text!
+        groupNames.append(group)
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

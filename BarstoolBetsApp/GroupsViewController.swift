@@ -23,9 +23,6 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     var currentRotation : Double!
     var spinAnimation : CABasicAnimation!
     
-    fileprivate var groupNames = [String]()
-        //["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
-    
     fileprivate var pageSize: CGSize {
         let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
         var pageSize = layout.itemSize
@@ -134,23 +131,27 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         hideAllHintArrows()
     }
     
-    func hideAllHintArrows() {
-        swipeDown.isHidden = true
-        swipeRight.isHidden = true
-        swipeLeft.isHidden = true
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        collectionView.reloadData()
     }
 }
 
 // MARK : Handlers
 extension GroupsViewController {
+    func hideAllHintArrows() {
+        swipeDown.isHidden = true
+        swipeRight.isHidden = true
+        swipeLeft.isHidden = true
+    }
     
     func epicBetsPressed(sender : AnyObject) {
         self.tabBarController?.selectedIndex = 1
     }
     
     func myProfilePressed(sender : AnyObject) {
-        //self.navigationController?.present(myProfileViewController, animated: true, completion: nil)
-        
+        print("my profile photo pressed")
     }
     
     func createGroupButtonPressed(sender : AnyObject) {

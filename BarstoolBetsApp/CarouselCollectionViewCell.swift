@@ -19,8 +19,10 @@ class CarouselCollectionViewCell: UICollectionViewCell {
     var groupName : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HelveticaNeue-Thin", size: 34)
+        label.font = UIFont(name: "HelveticaNeue-Thin", size: 22)
         label.textColor = UIColor.black
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
@@ -46,7 +48,7 @@ class CarouselCollectionViewCell: UICollectionViewCell {
         groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor).isActive = true
         groupName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         groupName.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        groupName.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        groupName.heightAnchor.constraint(equalToConstant: 55).isActive = true
         
     }
 }
