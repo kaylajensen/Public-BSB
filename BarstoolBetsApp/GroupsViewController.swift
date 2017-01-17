@@ -19,7 +19,8 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     var currentRotation : Double!
     var spinAnimation : CABasicAnimation!
     
-    fileprivate var groupNames = ["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
+    fileprivate var groupNames = [String]()
+        //["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
     
     fileprivate var pageSize: CGSize {
         let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
@@ -176,26 +177,34 @@ extension GroupsViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if groupNames.count == 0 {
+            return 1
+        }
         return groupNames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.identifier, for: indexPath) as! CarouselCollectionViewCell
-        cell.groupImage.image = UIImage(named: "gradient_barstool")
-        cell.groupName.text = groupNames[indexPath.row]
-        return cell
+        
+        if groupNames.count == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyGroupStateCollectionViewCell.identifier, for: indexPath) as! EmptyGroupStateCollectionViewCell
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.identifier, for: indexPath) as! CarouselCollectionViewCell
+            cell.groupName.text = groupNames[indexPath.row]
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let group = groupNames[indexPath.row]
         
-        let groupViewController = GroupViewController()
-        groupViewController.groupName = group
-        self.present(groupViewController, animated: true, completion: nil)
-        
-//        let alert = UIAlertController(title: group, message: nil, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        present(alert, animated: true, completion: nil)
+        if groupNames.count == 0 {
+            createGroupButtonPressed(sender: self)
+        } else {
+            let group = groupNames[indexPath.row]
+            let groupViewController = GroupViewController()
+            groupViewController.groupName = group
+            self.present(groupViewController, animated: true, completion: nil)
+        }
     }
     
     
@@ -337,6 +346,7 @@ extension GroupsViewController {
         let frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 260)
         collectionView = UICollectionView(frame: frame, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = UIColor.clear
+        collectionView.register(EmptyGroupStateCollectionViewCell.self, forCellWithReuseIdentifier: EmptyGroupStateCollectionViewCell.identifier)
         collectionView.register(CarouselCollectionViewCell.self, forCellWithReuseIdentifier: CarouselCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
