@@ -26,6 +26,14 @@ class CreateBetViewController: UIViewController {
         return button
     }()
     
+    lazy var exitButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "exit"), for: .normal)
+        button.addTarget(self, action: #selector(exitButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
     var ifIRollASevenLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -80,6 +88,10 @@ class CreateBetViewController: UIViewController {
         betTextField.becomeFirstResponder()
     }
     
+    func exitButtonPressed(sender : AnyObject) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
     func viewPopularBetsPressed(sender : AnyObject) {
         print("view popular bets pressed")
         let viewPopularBetsViewController = PopularBetsViewController()
@@ -116,6 +128,12 @@ class CreateBetViewController: UIViewController {
         ifIRollASevenLabel.topAnchor.constraint(equalTo: alertContainer.topAnchor,constant:10).isActive = true
         ifIRollASevenLabel.widthAnchor.constraint(equalTo: alertContainer.widthAnchor).isActive = true
         ifIRollASevenLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        alertContainer.addSubview(exitButton)
+        exitButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        exitButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        exitButton.topAnchor.constraint(equalTo: alertContainer.topAnchor,constant:7.5).isActive = true
+        exitButton.rightAnchor.constraint(equalTo: alertContainer.rightAnchor,constant:-7.5).isActive = true
         
         alertContainer.addSubview(betTextField)
         betTextField.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
