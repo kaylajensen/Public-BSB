@@ -180,12 +180,7 @@ extension GroupViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BetFriendCollectionViewCell
         
         cell.photoLabel.text = names[indexPath.row]
-        
-//        if indexPath.row == 5 {
-//            cell.setUsersTurn()
-//            cell.photoLabel.text = names[indexPath.row] + "'s Turn"
-//        }
-        
+
         if indexPath.row % 2 == 0 {
             cell.photoImageView.image = UIImage(named: "sample")
         } else {
@@ -199,6 +194,9 @@ extension GroupViewController {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+        let createBetViewController = CreateBetViewController()
+        createBetViewController.modalPresentationStyle = .overCurrentContext
+        self.present(createBetViewController, animated: false, completion: nil)
     }
 }
 

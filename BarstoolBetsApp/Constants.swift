@@ -11,8 +11,7 @@ import UIKit
 
  var names = ["Corbin Jensen","Kayla Jensen","Mackenzie Gillund","Eric Clapp","Allison Clapp","Michael Storto","Sarah Storo","Michael Maller","Mattie Stearns","Phil Crowley","Ally Crowley","Christopher Jensen","Bryce Kerney","Megan Jensen","Lyndsay Ross","Richard Ross","Carol Kerney","Craig Kerney","Lyndon Jensen","Debbie Jensen","Mitch Wilson","Emily Wilson","Stephanie Kilmer","Corbin Jensen","Kayla Jensen","Mackenzie Gillund","Eric Clapp","Allison Clapp","Michael Storto","Sarah Storo","Michael Maller","Mattie Stearns","Phil Crowley","Ally Crowley","Christopher Jensen","Bryce Kerney","Megan Jensen","Lyndsay Ross","Richard Ross","Carol Kerney","Craig Kerney","Lyndon Jensen","Debbie Jensen","Mitch Wilson","Emily Wilson","Stephanie Kilmer"]
 
-var groupNames = [String]()
-//["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
+var groupNames = ["Slim Shady 3's","The Transformers","The Aristacrats","The Mizspellers","The Bosses","The Nascar Peeps"]
 
 var BSB_RED = UIColor.init(netHex: 0xF45B69)
 var BSB_YELLOW = UIColor.init(netHex: 0xFDD750)

@@ -23,6 +23,7 @@
 		323B5E9C1DC7F86200674363 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323B5E9A1DC7F86200674363 /* LaunchScreen.storyboard */; };
 		323B5EA61DC8047E00674363 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 323B5EA51DC8047E00674363 /* launch.png */; };
 		325F35E51E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F35E41E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift */; };
+		325F35E71E2EA3ED005B367C /* CreateBetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F35E61E2EA3ED005B367C /* CreateBetViewController.swift */; };
 		32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC4E1E29560100F556BC /* EpicViewController.swift */; };
 		32A3BC511E296ED300F556BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC501E296ED300F556BC /* Constants.swift */; };
 		32A3BC531E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC521E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift */; };
@@ -55,6 +56,7 @@
 		323B5E9D1DC7F86200674363 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		323B5EA51DC8047E00674363 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		325F35E41E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyGroupStateCollectionViewCell.swift; sourceTree = "<group>"; };
+		325F35E61E2EA3ED005B367C /* CreateBetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBetViewController.swift; sourceTree = "<group>"; };
 		32A3BC4E1E29560100F556BC /* EpicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpicViewController.swift; sourceTree = "<group>"; };
 		32A3BC501E296ED300F556BC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		32A3BC521E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupFriendCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		322F7B731E2B21DB009092A8 /* Group */ = {
 			isa = PBXGroup;
 			children = (
+				325F35E61E2EA3ED005B367C /* CreateBetViewController.swift */,
 				322F7B741E2B21F1009092A8 /* GroupViewController.swift */,
 				321DAA9C1E2C164D00A5D897 /* ChatViewController.swift */,
 				321DAA981E2C015A00A5D897 /* ChatTableViewCell.swift */,
@@ -341,6 +344,7 @@
 				32B88B481E215FE5004BE1C0 /* CreateGroupViewController.swift in Sources */,
 				322F7B701E2AFBAC009092A8 /* VerticalScrollViewController.swift in Sources */,
 				32F948D41E1DF54600AFEA71 /* CarouselCollectionViewCell.swift in Sources */,
+				325F35E71E2EA3ED005B367C /* CreateBetViewController.swift in Sources */,
 				322F7B6F1E2AFBAC009092A8 /* SnapContainerViewController.swift in Sources */,
 				32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */,
 				325F35E51E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift in Sources */,
