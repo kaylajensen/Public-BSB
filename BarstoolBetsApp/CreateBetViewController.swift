@@ -82,10 +82,16 @@ class CreateBetViewController: UIViewController {
     
     func viewPopularBetsPressed(sender : AnyObject) {
         print("view popular bets pressed")
+        let viewPopularBetsViewController = PopularBetsViewController()
+        viewPopularBetsViewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewPopularBetsViewController, animated: false, completion: nil)
     }
     
     func viewSpecialsBetsPressed(sender : AnyObject) {
         print("view specials bets pressed")
+        let viewSpecialBetsViewController = SpecialBetsViewController()
+        viewSpecialBetsViewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewSpecialBetsViewController, animated: false, completion: nil)
     }
     
     func createBetButtonPressed(sender : AnyObject) {
@@ -129,5 +135,273 @@ class CreateBetViewController: UIViewController {
         viewPopularButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         viewPopularButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
-
 }
+
+class PopularBetsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var popularBetsTableView : UITableView!
+    
+    var alertContainer : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 6
+        return view
+    }()
+    
+    lazy var selectButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "select_button"), for: .normal)
+        button.addTarget(self, action: #selector(selectBetButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
+    var popularBetsLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 18)
+        label.text = "Popular Bets"
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var backButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "back_button"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
+    var lineSeparator : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = BSB_RED
+        return view
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.clear
+        
+        setupAlertView()
+    }
+    
+    func selectBetButtonPressed(sender : AnyObject) {
+        print("select bet pressed")
+    }
+    
+    func backButtonPressed(sender : AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func setupAlertView() {
+        view.addSubview(alertContainer)
+        alertContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        alertContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        alertContainer.heightAnchor.constraint(equalToConstant:260).isActive = true
+        alertContainer.widthAnchor.constraint(equalTo: view.widthAnchor,constant:-45).isActive = true
+        
+        view.addSubview(selectButton)
+        selectButton.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        selectButton.topAnchor.constraint(equalTo: alertContainer.bottomAnchor,constant:-45).isActive = true
+        selectButton.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        selectButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        
+        alertContainer.addSubview(popularBetsLabel)
+        popularBetsLabel.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        popularBetsLabel.topAnchor.constraint(equalTo: alertContainer.topAnchor,constant:10).isActive = true
+        popularBetsLabel.widthAnchor.constraint(equalTo: alertContainer.widthAnchor).isActive = true
+        popularBetsLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        alertContainer.addSubview(backButton)
+        backButton.centerYAnchor.constraint(equalTo: popularBetsLabel.centerYAnchor).isActive = true
+        backButton.leftAnchor.constraint(equalTo: alertContainer.leftAnchor,constant:5).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        alertContainer.addSubview(lineSeparator)
+        lineSeparator.widthAnchor.constraint(equalTo: alertContainer.widthAnchor).isActive = true
+        lineSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        lineSeparator.topAnchor.constraint(equalTo: popularBetsLabel.bottomAnchor,constant:8).isActive = true
+        lineSeparator.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        
+        let alertWidth = view.frame.width-55
+        let tvFrame = CGRect(x: 0, y: 0, width: alertWidth, height: 170)
+        popularBetsTableView = UITableView(frame: tvFrame, style: .plain)
+        popularBetsTableView.backgroundColor = UIColor.clear
+        popularBetsTableView.separatorStyle = .singleLine
+        popularBetsTableView.translatesAutoresizingMaskIntoConstraints = false
+        popularBetsTableView.delegate = self
+        popularBetsTableView.dataSource = self
+        popularBetsTableView.showsVerticalScrollIndicator = false
+        popularBetsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        popularBetsTableView.allowsSelection = true
+        
+        alertContainer.addSubview(popularBetsTableView)
+        popularBetsTableView.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        popularBetsTableView.topAnchor.constraint(equalTo: lineSeparator.bottomAnchor,constant:2).isActive = true
+        popularBetsTableView.widthAnchor.constraint(equalToConstant: alertWidth).isActive = true
+        popularBetsTableView.heightAnchor.constraint(equalToConstant: 170).isActive = true
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = popularBetsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+        cell.textLabel?.text = "Frantically clean the bar off, and then scream \"WATER!\""
+        cell.textLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 13)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.imageView?.image = UIImage(named: "wheel")
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 46
+    }
+}
+
+class SpecialBetsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var specialBetsTableView : UITableView!
+    
+    var alertContainer : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 6
+        return view
+    }()
+    
+    lazy var selectButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "select_button"), for: .normal)
+        button.addTarget(self, action: #selector(selectBetButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
+    var specialsBetsLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 18)
+        label.text = "Specials Near You"
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var backButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "back_button"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
+    var lineSeparator : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = BSB_RED
+        return view
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.clear
+        
+        setupAlertView()
+    }
+    
+    func selectBetButtonPressed(sender : AnyObject) {
+        print("select bet pressed")
+    }
+    
+    func backButtonPressed(sender : AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func setupAlertView() {
+        view.addSubview(alertContainer)
+        alertContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        alertContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        alertContainer.heightAnchor.constraint(equalToConstant:260).isActive = true
+        alertContainer.widthAnchor.constraint(equalTo: view.widthAnchor,constant:-45).isActive = true
+        
+        view.addSubview(selectButton)
+        selectButton.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        selectButton.topAnchor.constraint(equalTo: alertContainer.bottomAnchor,constant:-45).isActive = true
+        selectButton.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        selectButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        
+        alertContainer.addSubview(specialsBetsLabel)
+        specialsBetsLabel.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        specialsBetsLabel.topAnchor.constraint(equalTo: alertContainer.topAnchor,constant:10).isActive = true
+        specialsBetsLabel.widthAnchor.constraint(equalTo: alertContainer.widthAnchor).isActive = true
+        specialsBetsLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        alertContainer.addSubview(backButton)
+        backButton.centerYAnchor.constraint(equalTo: specialsBetsLabel.centerYAnchor).isActive = true
+        backButton.leftAnchor.constraint(equalTo: alertContainer.leftAnchor,constant:5).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        alertContainer.addSubview(lineSeparator)
+        lineSeparator.widthAnchor.constraint(equalTo: alertContainer.widthAnchor).isActive = true
+        lineSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        lineSeparator.topAnchor.constraint(equalTo: specialsBetsLabel.bottomAnchor,constant:8).isActive = true
+        lineSeparator.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        
+        let alertWidth = view.frame.width-55
+        let tvFrame = CGRect(x: 0, y: 0, width: alertWidth, height: 170)
+        specialBetsTableView = UITableView(frame: tvFrame, style: .plain)
+        specialBetsTableView.backgroundColor = UIColor.clear
+        specialBetsTableView.separatorStyle = .singleLine
+        specialBetsTableView.translatesAutoresizingMaskIntoConstraints = false
+        specialBetsTableView.delegate = self
+        specialBetsTableView.dataSource = self
+        specialBetsTableView.showsVerticalScrollIndicator = false
+        specialBetsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        specialBetsTableView.allowsSelection = true
+        
+        alertContainer.addSubview(specialBetsTableView)
+        specialBetsTableView.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor).isActive = true
+        specialBetsTableView.topAnchor.constraint(equalTo: lineSeparator.bottomAnchor,constant:2).isActive = true
+        specialBetsTableView.widthAnchor.constraint(equalToConstant: alertWidth).isActive = true
+        specialBetsTableView.heightAnchor.constraint(equalToConstant: 170).isActive = true
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = specialBetsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+        cell.textLabel?.text = "2 for 1 shots at Rookies"
+        cell.textLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 13)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.imageView?.image = UIImage(named: "wheel")
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 46
+    }
+}
+
