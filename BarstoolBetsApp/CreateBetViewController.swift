@@ -50,7 +50,7 @@ class CreateBetViewController: UIViewController {
         field.placeholder = "Enter Bet"
         field.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
         field.textColor = UIColor.black
-        field.backgroundColor = UIColor.init(netHex: 0xBCBCBC).withAlphaComponent(0.11)
+        field.backgroundColor = BSB_LIGHT_GRAY.withAlphaComponent(0.11)
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 7.5, height: 35))
         field.leftViewMode = .always
         field.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 7.5, height: 35))
@@ -108,6 +108,9 @@ class CreateBetViewController: UIViewController {
     
     func createBetButtonPressed(sender : AnyObject) {
         print("create new bet pressed")
+        let shakeDiceViewController = DiceViewController()
+        shakeDiceViewController.modalPresentationStyle = .overCurrentContext
+        self.present(shakeDiceViewController, animated: true, completion: nil)
     }
     
     func setupAlertView() {

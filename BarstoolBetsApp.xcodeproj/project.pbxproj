@@ -24,6 +24,7 @@
 		323B5EA61DC8047E00674363 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 323B5EA51DC8047E00674363 /* launch.png */; };
 		325F35E51E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F35E41E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift */; };
 		325F35E71E2EA3ED005B367C /* CreateBetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F35E61E2EA3ED005B367C /* CreateBetViewController.swift */; };
+		325F35E91E2EC584005B367C /* DiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F35E81E2EC584005B367C /* DiceViewController.swift */; };
 		32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC4E1E29560100F556BC /* EpicViewController.swift */; };
 		32A3BC511E296ED300F556BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC501E296ED300F556BC /* Constants.swift */; };
 		32A3BC531E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BC521E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift */; };
@@ -57,6 +58,7 @@
 		323B5EA51DC8047E00674363 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		325F35E41E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyGroupStateCollectionViewCell.swift; sourceTree = "<group>"; };
 		325F35E61E2EA3ED005B367C /* CreateBetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBetViewController.swift; sourceTree = "<group>"; };
+		325F35E81E2EC584005B367C /* DiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceViewController.swift; sourceTree = "<group>"; };
 		32A3BC4E1E29560100F556BC /* EpicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpicViewController.swift; sourceTree = "<group>"; };
 		32A3BC501E296ED300F556BC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		32A3BC521E296FDB00F556BC /* CreateGroupFriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupFriendCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				321DAA9C1E2C164D00A5D897 /* ChatViewController.swift */,
 				321DAA981E2C015A00A5D897 /* ChatTableViewCell.swift */,
 				321DAA9A1E2C0CE600A5D897 /* BetFriendCollectionViewCell.swift */,
+				325F35E81E2EC584005B367C /* DiceViewController.swift */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				325F35E71E2EA3ED005B367C /* CreateBetViewController.swift in Sources */,
 				322F7B6F1E2AFBAC009092A8 /* SnapContainerViewController.swift in Sources */,
 				32A3BC4F1E29560100F556BC /* EpicViewController.swift in Sources */,
+				325F35E91E2EC584005B367C /* DiceViewController.swift in Sources */,
 				325F35E51E2E79A8005B367C /* EmptyGroupStateCollectionViewCell.swift in Sources */,
 				32F948D61E1DF5B700AFEA71 /* UPCarouselFlowLayout.swift in Sources */,
 				323B5E921DC7F86200674363 /* AppDelegate.swift in Sources */,
