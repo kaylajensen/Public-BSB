@@ -10,6 +10,10 @@ import UIKit
 
 class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
 
+    var swipeDown : UIButton!
+    var swipeLeft : UIButton!
+    var swipeRight : UIButton!
+    
     var createGroupViewController = CreateGroupViewController()
     var myProfileViewController = MyProfileViewController()
     var collectionView : UICollectionView!
@@ -126,6 +130,14 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         setupTabIcons()
         setupProfileTabView()
+        
+        hideAllHintArrows()
+    }
+    
+    func hideAllHintArrows() {
+        swipeDown.isHidden = true
+        swipeRight.isHidden = true
+        swipeLeft.isHidden = true
     }
 }
 
@@ -241,7 +253,7 @@ extension GroupsViewController {
         notificationView.heightAnchor.constraint(equalToConstant: 19).isActive = true
         notificationView.widthAnchor.constraint(equalToConstant: 19).isActive = true
         
-        let swipeDown = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        swipeDown = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         let origImage = UIImage(named: "swipe_down_arrow")
         let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
         swipeDown.setImage(tintedImage, for: .normal)
@@ -285,7 +297,7 @@ extension GroupsViewController {
         groupsLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
         groupsLabel.widthAnchor.constraint(equalTo: groupsTabButton.widthAnchor).isActive = true
         
-        let swipeRight = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        swipeRight = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         let origImage = UIImage(named: "swipe_left_arrow")
         let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
         swipeRight.setImage(tintedImage, for: .normal)
@@ -318,7 +330,7 @@ extension GroupsViewController {
         epicLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
         epicLabel.widthAnchor.constraint(equalTo: epicTabButton.widthAnchor).isActive = true
         
-        let swipeLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        swipeLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         let origImage1 = UIImage(named: "swipe_right_arrow")
         let tintedImage1 = origImage1?.withRenderingMode(.alwaysTemplate)
         swipeLeft.setImage(tintedImage1, for: .normal)
