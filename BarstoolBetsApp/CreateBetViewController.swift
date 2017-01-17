@@ -9,6 +9,8 @@
 import UIKit
 
 class CreateBetViewController: UIViewController {
+    
+    var betiesName = ""
 
     var alertContainer : UIView = {
         let view = UIView()
@@ -37,8 +39,7 @@ class CreateBetViewController: UIViewController {
     var ifIRollASevenLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HelveticaNeue-Light", size: 18)
-        label.text = "If I Roll a 7, Corbin has to..."
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 17)
         label.textColor = UIColor.black
         label.textAlignment = .center
         return label
@@ -86,6 +87,7 @@ class CreateBetViewController: UIViewController {
         setupAlertView()
         
         betTextField.becomeFirstResponder()
+        ifIRollASevenLabel.text = "If I Roll a 7, " + betiesName + " has to..."
     }
     
     func exitButtonPressed(sender : AnyObject) {

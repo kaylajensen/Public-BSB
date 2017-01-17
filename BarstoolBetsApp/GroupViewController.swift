@@ -195,6 +195,7 @@ extension GroupViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         let createBetViewController = CreateBetViewController()
+        createBetViewController.betiesName = names[indexPath.row]
         createBetViewController.modalPresentationStyle = .overCurrentContext
         self.present(createBetViewController, animated: false, completion: nil)
     }
