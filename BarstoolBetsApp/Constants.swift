@@ -17,6 +17,7 @@ var BSB_RED = UIColor.init(netHex: 0xF45B69)
 var BSB_YELLOW = UIColor.init(netHex: 0xFDD750)
 var BSB_LIGHT_YELLOW = UIColor.init(netHex: 0xFDE273)
 var BSB_ORANGE = UIColor.init(netHex: 0xFBAE17)
+var BSB_LIGHT_ORANGE = UIColor.init(netHex: 0xFCBB29)
 var BSB_LIGHT_GRAY = UIColor.init(netHex: 0xBCBCBC)
 
 var nav1 : UINavigationController!
