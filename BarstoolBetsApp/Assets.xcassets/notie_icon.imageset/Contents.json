@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "groups_tab.png",
+      "filename" : "notie_icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "groups_tab@2x.png",
+      "filename" : "notie_icon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "groups_tab@3x.png",
+      "filename" : "notie_icon@3x.png",
       "scale" : "3x"
     }
   ],

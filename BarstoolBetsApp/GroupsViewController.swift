@@ -34,12 +34,12 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         return pageSize
     }
     
-    lazy var newGroupTabButton : UIButton = {
+    lazy var notieTabButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "create_group_icon"), for: .normal)
+        button.setImage(UIImage(named: "notie_icon"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-        button.addTarget(self, action: #selector(createGroupButtonPressed(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(notieButtonPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -142,20 +142,22 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
 extension GroupsViewController {
     func hideAllHintArrows() {
         swipeDown.isHidden = true
-        swipeRight.isHidden = true
-        swipeLeft.isHidden = true
     }
     
     func epicBetsPressed(sender : AnyObject) {
-        self.tabBarController?.selectedIndex = 1
+        print("epic bets tab pressed")
     }
     
     func myProfilePressed(sender : AnyObject) {
         print("my profile photo pressed")
     }
     
-    func createGroupButtonPressed(sender : AnyObject) {
-        self.navigationController?.present(createGroupViewController, animated: true,completion: nil)
+    func notieButtonPressed(sender : AnyObject) {
+        print("notie view pressed")
+    }
+    
+    func createFirstGroupButtonPressed(sender : AnyObject) {
+        self.present(createGroupViewController, animated: true, completion: nil)
     }
     
     func didRotateWheel(sender : UIPanGestureRecognizer) {
@@ -211,7 +213,7 @@ extension GroupsViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if groupNames.count == 0 {
-            createGroupButtonPressed(sender: self)
+            createFirstGroupButtonPressed(sender: self)
         } else {
             let group = groupNames[indexPath.row]
             let groupViewController = GroupViewController()
@@ -271,79 +273,29 @@ extension GroupsViewController {
     }
     
     func setupTabIcons() {
-        let iconsHeightWidth : CGFloat = 75
-        
-        view.addSubview(newGroupTabButton)
-        newGroupTabButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        newGroupTabButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-15).isActive = true
-        newGroupTabButton.heightAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
-        newGroupTabButton.widthAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        let iconsHeight : CGFloat = 70
+        //54.69
+        let iconsWidth : CGFloat = 84
+        //57.24
         
         view.addSubview(groupsTabButton)
-        groupsTabButton.rightAnchor.constraint(equalTo: newGroupTabButton.leftAnchor,constant:-40).isActive = true
-        groupsTabButton.bottomAnchor.constraint(equalTo: newGroupTabButton.centerYAnchor).isActive = true
-        groupsTabButton.heightAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
-        groupsTabButton.widthAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
-        
-        let groupsLabel = UILabel()
-        groupsLabel.text = "Groups"
-        groupsLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 10)
-        groupsLabel.textColor = BSB_RED
-        groupsLabel.textAlignment = .center
-
-        view.addSubview(groupsLabel)
-        groupsLabel.translatesAutoresizingMaskIntoConstraints = false
-        groupsLabel.centerXAnchor.constraint(equalTo: groupsTabButton.centerXAnchor).isActive = true
-        groupsLabel.topAnchor.constraint(equalTo: groupsTabButton.bottomAnchor,constant:-15).isActive = true
-        groupsLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        groupsLabel.widthAnchor.constraint(equalTo: groupsTabButton.widthAnchor).isActive = true
-        
-        swipeRight = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        let origImage = UIImage(named: "swipe_left_arrow")
-        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-        swipeRight.setImage(tintedImage, for: .normal)
-        swipeRight.tintColor = UIColor.black.withAlphaComponent(0.1)
-        swipeRight.contentMode = .scaleAspectFit
-        swipeRight.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(swipeRight)
-        swipeRight.centerYAnchor.constraint(equalTo: groupsTabButton.centerYAnchor).isActive = true
-        swipeRight.rightAnchor.constraint(equalTo: groupsTabButton.leftAnchor).isActive = true
-        swipeRight.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        swipeRight.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        groupsTabButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        groupsTabButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:-15).isActive = true
+        groupsTabButton.heightAnchor.constraint(equalToConstant: iconsHeight).isActive = true
+        groupsTabButton.widthAnchor.constraint(equalToConstant: iconsWidth).isActive = true
         
         view.addSubview(epicTabButton)
-        epicTabButton.leftAnchor.constraint(equalTo: newGroupTabButton.rightAnchor,constant:40).isActive = true
-        epicTabButton.bottomAnchor.constraint(equalTo: newGroupTabButton.centerYAnchor).isActive = true
-        epicTabButton.heightAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
-        epicTabButton.widthAnchor.constraint(equalToConstant: iconsHeightWidth).isActive = true
+        epicTabButton.leftAnchor.constraint(equalTo: groupsTabButton.rightAnchor,constant:30).isActive = true
+        epicTabButton.bottomAnchor.constraint(equalTo: groupsTabButton.centerYAnchor).isActive = true
+        epicTabButton.heightAnchor.constraint(equalToConstant: iconsHeight).isActive = true
+        epicTabButton.widthAnchor.constraint(equalToConstant: iconsWidth).isActive = true
         
-        let epicLabel = UILabel()
-        epicLabel.text = "Epic"
-        epicLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 10)
-        epicLabel.textColor = BSB_YELLOW
-        epicLabel.textAlignment = .center
+        view.addSubview(notieTabButton)
+        notieTabButton.rightAnchor.constraint(equalTo: groupsTabButton.leftAnchor,constant:-30).isActive = true
+        notieTabButton.bottomAnchor.constraint(equalTo: groupsTabButton.centerYAnchor).isActive = true
+        notieTabButton.heightAnchor.constraint(equalToConstant: iconsHeight).isActive = true
+        notieTabButton.widthAnchor.constraint(equalToConstant: iconsWidth).isActive = true
         
-        view.addSubview(epicLabel)
-        epicLabel.translatesAutoresizingMaskIntoConstraints = false
-        epicLabel.centerXAnchor.constraint(equalTo: epicTabButton.centerXAnchor).isActive = true
-        epicLabel.topAnchor.constraint(equalTo: epicTabButton.bottomAnchor,constant:-15).isActive = true
-        epicLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        epicLabel.widthAnchor.constraint(equalTo: epicTabButton.widthAnchor).isActive = true
-        
-        swipeLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        let origImage1 = UIImage(named: "swipe_right_arrow")
-        let tintedImage1 = origImage1?.withRenderingMode(.alwaysTemplate)
-        swipeLeft.setImage(tintedImage1, for: .normal)
-        swipeLeft.tintColor = UIColor.black.withAlphaComponent(0.1)
-        swipeLeft.contentMode = .scaleAspectFit
-        swipeLeft.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(swipeLeft)
-        swipeLeft.centerYAnchor.constraint(equalTo: epicTabButton.centerYAnchor).isActive = true
-        swipeLeft.leftAnchor.constraint(equalTo: epicTabButton.rightAnchor).isActive = true
-        swipeLeft.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        swipeLeft.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func setupCollectionView() {
